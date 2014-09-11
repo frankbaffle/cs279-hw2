@@ -14,3 +14,5 @@ app.use(routes);
 http.createServer(app).listen( app.get('port'), null, function(){
     console.log('Express server listening on port ' + app.get('port'));
 });
+
+//TODO: Add database hookup
