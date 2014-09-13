@@ -22,10 +22,10 @@ module.exports = function (grunt) {
         handlebars: {
             dev: {
                 files: {
-                    "static/templates.js": ["src/templates/**/*.hbs"]
+                    "static/templates.js": ["templates/**/*.hbs"]
                 },
                 options: {
-                    namespace: 'hw2.templates',
+                    namespace: 'cs279hw2.templates',
                     processName: function(filePath) {
                         var pieces = filePath.split("/");
                         return pieces[pieces.length - 1].replace('.hbs', ''); 
@@ -38,8 +38,8 @@ module.exports = function (grunt) {
             compile: {
                 options: {
                     name: 'main',
-                    baseUrl: 'src/js/',
-                    mainConfigFile: 'src/js/main.js',
+                    baseUrl: 'app/js/',
+                    mainConfigFile: 'app/js/main.js',
                     out: 'prod/js/main.js'
                 }
             }
@@ -61,7 +61,7 @@ module.exports = function (grunt) {
         }
     });
     
-    grunt.registerTask('build', ['bower:main']);
+    grunt.registerTask('build', ['bower:main', 'handlebars']);
     grunt.registerTask('default', ['build']);
     
 };

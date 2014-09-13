@@ -652,7 +652,7 @@ else
                     \(              // literal paren
                     [ \t]*
                     ()              // no id, so leave $3 empty
-                    <?(\S+?)>?      // src url = $4
+                    <?(\S+?)>?      // app url = $4
                     [ \t]*
                     (               // $5
                         (['"])      // quote char = $6
@@ -704,7 +704,7 @@ else
 
             alt_text = escapeCharacters(attributeEncode(alt_text), "*_[]()");
             url = escapeCharacters(url, "*_");
-            var result = "<img src=\"" + url + "\" alt=\"" + alt_text + "\"";
+            var result = "<img app=\"" + url + "\" alt=\"" + alt_text + "\"";
 
             // attacklab: Markdown.pl adds empty title attributes to images.
             // Replicate this bug.

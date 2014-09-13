@@ -16,7 +16,7 @@
   "white": true,
   "laxcomma": true,
   "predef": [
-    "wanderu",
+    "cs279hw2",
     "google",
     "_",
     "Backbone",
