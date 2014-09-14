@@ -59,6 +59,7 @@ define([
         blockView.setTask(task);
         blockView.render();
         $("#block-container").html(blockView.el);
+        //$("#block-container").attr("active");
 
     };
 

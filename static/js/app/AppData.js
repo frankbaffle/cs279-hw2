@@ -10,7 +10,15 @@ define([
         var group2 = [rBlock, cmBlock];
 
         function getTrials(num, commandSet){
-            return [];
+            var result = [];
+            var tabs = _.filter(commandSet, function(item){return item.type == "tabs"});
+            var commands = _.filter(commandSet, function(item){return item.type == "command"});
+            for (var i =-1;++i<num;){
+                var randomCommand = parseInt(Math.random()*commands.length);
+                var cmd = commands[randomCommand];
+                result.push(cmd);
+            }
+            return result;
         }
 
         function getTask(value, seedBlock, numTrials){
