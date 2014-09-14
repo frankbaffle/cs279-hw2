@@ -1,4 +1,4 @@
-// state = start, experiment, nasa, survey
+// state = start, experiment, nasa, survey, thankyou
 // task = 0
 // trial = 0
 

@@ -45,3 +45,12 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
   return "<div>\n    <h1>Survey</h1>\n    <br>\n    <button id=\"next\" type=\"button\" class=\"btn btn-default\">Next</button>\n</div>";
   });
+
+this["cs279hw2"]["templates"]["ThankYou"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div>\n    <h1>Thank You!</h1>\n</div>";
+  });

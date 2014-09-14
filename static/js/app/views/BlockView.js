@@ -8,15 +8,17 @@ define([
         tagName: "div",
 
         events: {
-            "click": "onClick"
+            "click": "onClick",
+            "click #next": "onNextClick"
         },
 
         initialize: function(){
-            this.commandCorrect = 0;
-            this.commandIncorrect = 0;
-            this.totalIncorrect = 0;
-            this.tabSwitch = 0;
-            this.selectionTime = 0;
+            this.trialLog = [];
+            this.currentLog = null;
+        },
+
+        die: function(){
+          this.removeAllListeners();
         },
 
         setTask: function(task){
@@ -32,39 +34,76 @@ define([
         },
 
         onClick: function(target){
+            this.currentLog.clicks += 1;
             var x = target.offsetX;
             var y = target.offsetY;
             var hit = this.hitTest(x, y);
             if(hit == null){
-                this.beep();
+                this.misClick(hit);
             } else {
                 if(hit.type == "tab"){
                     if(task.interface == "CommandMaps"){
-                        this.error(hit);
+                        this.misClick(hit);
                     } else {
                         this.tabSwitch(hit);
+                    }
+                } else {
+                    if (hit.name == this.currentTrial.name){
+                        this.rightCommand(hit);
+                    } else {
+                        this.wrongCommand(hit);
                     }
                 }
             }
         },
 
+        start: function(){
+            this.currentTrial = this.trials[this.trialLog.length];
+            this.currentLog = this.getNewLog();
+            this.updateTrialDisplay();
+        },
+
+        getNewLog: function(){
+            return {
+                time: new Date(),
+                wrongCommand: 0,
+                misClick: 0,
+                clicks: 0,
+                tabSwitches: 0
+            }
+        },
+
         rightCommand: function(hit){
-            this.log("misClick");
+            this.currentLog.time = (new Date()) - this.currentLog.time;
+            this.trialLog.push(this.currentLog);
+            console.log("trial "+this.trialLog.length+" complete", this.currentLog);
+
+            if(this.trialLog.length < this.trials.length){
+                this.currentTrial = this.trials[this.trialLog.length];
+                this.currentLog = this.getNewLog();
+                this.updateTrialDisplay();
+            } else {
+                this.complete();
+            }
+
         },
 
         wrongCommand: function(hit){
-            this.log("misClick");
+            this.beep();
+            this.currentLog.wrongCommand += 1;
         },
 
         misClick: function(hit){
-            this.log("misClick");
+            this.beep();
+            this.currentLog.misClick += 1;
         },
 
         tabSwitch: function(hit){
-            this.log("tabSwitch");
+            this.currentLog.tabSwitches += 1;
         },
 
-        log: function(){
+        //TODO: display next trial using this.currentTrial
+        updateTrialDisplay: function(){
 
         },
 
@@ -88,6 +127,12 @@ define([
 
         complete: function(){
             EventBus.trigger("blockCompleted", this);
+        },
+
+        //for testing only...
+        onNextClick: function(){
+            console.log("onNextClick");
+            this.complete();
         }
 
     });
