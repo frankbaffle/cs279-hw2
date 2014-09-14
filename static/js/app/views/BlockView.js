@@ -11,10 +11,11 @@ define([
         //template: cs279hw2.templates.Start,
 
         events: {
-            "click": "userClick"
+            "click": "onClick"
         },
 
         initialize: function(){
+            this.startXY = null;
         },
 
         setTask: function(task){
@@ -29,8 +30,18 @@ define([
             return this;
         },
 
-        userClick: function(target){
-            console.log("userClick", target);
+        onClick: function(target){
+            if (this.startXY == null) {
+                this.startXY = [target.offsetX, target.offsetY];
+            } else {
+                var o = {};
+                o['x'] = this.startXY[0];
+                o['y'] = this.startXY[1];
+                o['width'] = target.offsetX - o['x'];
+                o['height'] = target.offsetY - o['y'];
+                console.log(o);
+                this.startXY = null;
+            }
         },
 
         complete: function(){
