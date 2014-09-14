@@ -1,5 +1,7 @@
-// Global states:
-// - state = start, interface = 0, block = 0, trial = 0
+// state = start, experiment, nasa, survey
+// task = 0
+// trial = 0
+
 define([], function () {
 
     var StateModel = Backbone.Model.extend({
@@ -7,8 +9,7 @@ define([], function () {
         defaults: function() {
             return {
                 state: "start",
-                interface: 0,
-                block: 0,
+                task: 0,
                 trial: 0
             };
         }
