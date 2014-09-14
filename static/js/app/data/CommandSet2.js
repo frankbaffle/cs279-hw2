@@ -9,15 +9,15 @@ define(["TrialTargetModel"],
             type: "tab"
         });
 
-        bold = new TrialTargetModel({
-            name: "bold",
+        italics = new TrialTargetModel({
+            name: "italics",
             boundingBox: {x: 0, y: 0, width: 1, height: 1},
             parent: home,
             children: [],
             type: "command"
         });
 
-        home.attributes.children.push(bold);
+        home.attributes.children.push(italics);
 
-        return [home, bold];
+        return [home, italics];
 });

@@ -9,7 +9,7 @@ define(["EventBus"],
         State.prototype.init = function (stateModel) {
             this.stateModel = stateModel;
             //this.stateModel.on("reset", _.bind(this.setState, this));
-            //this.stateModel.on("change", _.bind(this.setState, this));
+            this.stateModel.on("change", _.bind(this.pushState, this));
 
             History.Adapter.bind(window, 'statechange', _.bind(this.browserStateChange, this));
         };
@@ -30,6 +30,7 @@ define(["EventBus"],
         };
 
         State.prototype.pushState = function(stateModel){
+            stateModel.save();
             History.pushState.apply(History, this.toStateParams(stateModel));
         };
 
