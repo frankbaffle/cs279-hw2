@@ -42,7 +42,7 @@ define([
                 this.misClick(hit);
             } else {
                 if(hit.type == "tab"){
-                    if(task.interface == "CommandMaps"){
+                    if(this.task.interface == "CommandMaps"){
                         this.misClick(hit);
                     } else {
                         this.tabSwitch(hit);

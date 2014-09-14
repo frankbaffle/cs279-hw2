@@ -7,7 +7,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<img src=\"img/tabs/insert_tab.png\" />";
+  return "<img src=\"img/tabs/commandmap_layout.png\" />";
   });
 
 this["cs279hw2"]["templates"]["Nasa"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
