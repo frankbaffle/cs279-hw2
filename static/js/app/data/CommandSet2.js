@@ -73,8 +73,8 @@ define(["TrialTargetModel"],
         home.children.push(superscript);
         insert.children.push(hyperlink);
         insert.children.push(table);
-        view.children.push(macro);
+        view.children.push(macros);
 
-        return [home, insert, view, italics, highlight, superscript, hyperlink, table, macro];
+        return [home, insert, view, italics, highlight, superscript, hyperlink, table, macros];
 
 });
