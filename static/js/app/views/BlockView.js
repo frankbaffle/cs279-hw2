@@ -15,6 +15,7 @@ define([
         initialize: function(){
             this.trialLog = [];
             this.currentLog = null;
+            this.currentTab = "home";
         },
 
         die: function(){
@@ -48,7 +49,7 @@ define([
                         this.tabSwitch(hit);
                     }
                 } else {
-                    if (hit.name == this.currentTrial.name){
+                    if (hit.name == this.currentTrial.name && hit.parent.name == this.currentTab){
                         this.rightCommand(hit);
                     } else {
                         this.wrongCommand(hit);
@@ -100,11 +101,24 @@ define([
 
         tabSwitch: function(hit){
             this.currentLog.tabSwitches += 1;
+            this.currentTab = hit.name;
+            console.log("tabSwitch", this.currentTab);
+
+            if(this.task.interface == "Ribbons"){
+                $("#layoutImg").attr("src", "img/tabs/"+this.currentTab+"_tab.png");
+            }
         },
 
         //TODO: display next trial using this.currentTrial
         updateTrialDisplay: function(){
+            var name = this.currentTrial.name;
+            console.log('updateTrialDisplay', name);
+            try {
+                $("#commandImg").attr("src", "img/icons/"+name+".png");
+                $("#commandDescription").html(name);
+            } catch(e){
 
+            }
         },
 
         hitTest: function(x, y){

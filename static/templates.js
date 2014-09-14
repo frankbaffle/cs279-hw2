@@ -7,7 +7,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<img src=\"img/tabs/commandmap_layout.png\" />";
+  return "<div class=\"row\">\n    <div class=\"col-md-2\">\n        <img id=\"commandImg\" src=\"img/icons/bold.png\" />\n    </div>\n    <div class=\"col-md-2\">\n        <p id=\"commandDescription\">bold</p>\n    </div>\n    <div class=\"col-md-8\">\n        <button id=\"next\" type=\"button\" class=\"btn btn-default\">Skip (testing only)</button>\n    </div>\n</div>\n<div class=\"row\">\n    <img id=\"layoutImg\" src=\"img/tabs/commandmap_layout.png\" />\n</div>";
   });
 
 this["cs279hw2"]["templates"]["Nasa"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -25,7 +25,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div>\n    <h1>Ribbons</h1>\n    <br>\n    <button id=\"next\" type=\"button\" class=\"btn btn-default\">Next</button>\n</div>";
+  return "<div class=\"row\">\n    <div class=\"col-md-2\">\n        <img id=\"commandImg\" src=\"img/icons/bold.png\" />\n    </div>\n    <div class=\"col-md-2\">\n        <p id=\"commandDescription\">bold</p>\n    </div>\n    <div class=\"col-md-8\">\n        <button id=\"next\" type=\"button\" class=\"btn btn-default\">Skip (testing only)</button>\n    </div>\n</div>\n<div class=\"row\">\n    <img id=\"layoutImg\" src=\"img/tabs/home_tab.png\" />\n</div>";
   });
 
 this["cs279hw2"]["templates"]["Start"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
