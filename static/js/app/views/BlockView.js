@@ -95,6 +95,7 @@ define([
         },
 
         rightCommand: function(hit){
+            this.beep2();
             this.currentLog.time = (new Date()) - this.currentLog.time;
             this.trialLog.push(this.currentLog);
             console.log("trial "+this.trialLog.length+" complete", this.currentLog);
@@ -155,7 +156,13 @@ define([
 
         beep: function(){
             var soundHandle = document.getElementById('soundHandle');
-            soundHandle.src = 'sounds/beep.wav';
+            soundHandle.src = 'sounds/incorrect.wav';
+            soundHandle.play();
+        },
+
+        beep2: function(){
+            var soundHandle = document.getElementById('soundHandle');
+            soundHandle.src = 'sounds/correct.wav';
             soundHandle.play();
         },
 
