@@ -160,8 +160,8 @@ define([
                 var sy = box.y*scaleY;
                 var ex = (box.x+box.width)*scaleX;
                 var ey = (box.y+box.height)*scaleY;
-                var r = Math.round;
                 /*
+                var r = Math.round;
                 console.log(target.name);
                 console.log("sx < x < ex", r(sx), r(x), r(ex));
                 console.log("sy < y < ey", r(sy), r(y), r(ey));
