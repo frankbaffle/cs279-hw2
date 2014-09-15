@@ -30,8 +30,8 @@ define(["TrialTargetModel"],
             children: [],
             type: "tab"
         };
-        mailings = {
-            name: "mailings",
+        mailing = {
+            name: "mailing",
             boundingBox: {x: 501, y: 51, width: 97, height: 32},
             parent: null,
             children: [],
@@ -104,8 +104,8 @@ define(["TrialTargetModel"],
         insert.children.push(table);
         view.children.push(macros);
 
-        //return [home, insert, pagelayout, references, mailings, review, view, italics, highlight, superscript, hyperlink, table, macros];
-        return [home, insert, view, italics, highlight, superscript, hyperlink, table, macros];
+        return [home, insert, pagelayout, references, mailing, review, view, italics, highlight, superscript, hyperlink, table, macros];
+        //return [home, insert, view, italics, highlight, superscript, hyperlink, table, macros];
 
 
 });
