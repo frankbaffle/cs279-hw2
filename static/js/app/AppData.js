@@ -24,7 +24,7 @@
                 var counter = 0;
                 while (counter < perm_HIV.length/2){
                     counter = 0;
-                for (i=0; i< perm_HIV.length-1; i++){
+                for (var i=0; i< perm_HIV.length-1; i++){
                     if (perm_HIV[i] - perm_HIV[i+1] != 0){
                         counter++;
                     }
@@ -38,7 +38,7 @@
                 var result = [];
                 var tabs = _.filter(commandSet, function(item){return item.type == "tabs"});
                 var commands = _.filter(commandSet, function(item){return item.type == "command"});
-                for (i=0; i< perm_HIV.length; i++){
+                for (var i=0; i< perm_HIV.length; i++){
                     if (perm_HIV[i] == 0){
                         if (Hcounter < 5){
                             var cmd = commands[0];
@@ -116,6 +116,8 @@
                 tasks.push(getTask("familiarize", block, 30));
                 tasks.push(getTask("perform", block, 90));
             }
+
+            console.log(tasks);
 
             var data = {};
             data['tasks'] = tasks;
