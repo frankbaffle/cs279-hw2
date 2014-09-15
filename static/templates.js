@@ -34,7 +34,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div style=\"width:100%;height:100%;position:absolute;vertical-align:middle;text-align:center;\">\n    <h1>Start</h1>\n    <br>\n    <button id=\"next\" type=\"button\" class=\"btn btn-default\" style=\"margin-left:auto;margin-right:auto;display:block;margin-top:20%;margin-bottom:0%\">Next</button>\n</div>";
+  return "<div style=\"width:200px;height:100px;position:absolute;left:50%;top:50%;\nmargin-left:-50px;margin-top:-50px;text-align:center;\">\n    <h1>Start</h1>\n    <br>\n    <button id=\"next\" type=\"button\" class=\"btn btn-default\">Next</button>\n</div>";
   });
 
 this["cs279hw2"]["templates"]["Survey"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
