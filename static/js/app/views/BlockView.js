@@ -34,6 +34,20 @@ define([
             return this;
         },
 
+
+        /*onClick: function(target){
+            if (this.startXY == null) {
+                this.startXY = [target.offsetX, target.offsetY];
+            } else {
+                var o = {};
+                o['x'] = this.startXY[0];
+                o['y'] = this.startXY[1];
+                o['width'] = target.offsetX - o['x'];
+                o['height'] = target.offsetY - o['y'];
+                console.log(o);
+                this.startXY = null;
+            }
+        },*/
         onClick: function(target){
             console.log(target.offsetX, target.offsetY, target);
             this.currentLog.clicks += 1;

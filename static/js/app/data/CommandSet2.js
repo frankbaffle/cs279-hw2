@@ -15,6 +15,35 @@ define(["TrialTargetModel"],
             children: [],
             type: "tab"
         };
+        
+        pagelayout = {
+            name: "pagelayout",
+            boundingBox: {x: 246, y: 50, width: 122, height: 32},
+            parent: null,
+            children: [],
+            type: "tab"
+        };
+        references = {
+            name: "references",
+            boundingBox: {x: 377, y: 52, width: 118, height: 31},
+            parent: null,
+            children: [],
+            type: "tab"
+        };
+        mailings = {
+            name: "mailings",
+            boundingBox: {x: 501, y: 51, width: 97, height: 32},
+            parent: null,
+            children: [],
+            type: "tab"
+        };
+        review = {
+            name: "review",
+            boundingBox: {x: 606, y: 52, width: 88, height: 30},
+            parent: null,
+            children: [],
+            type: "tab"
+        };
         view = {
             name: "view",
             boundingBox: {x: 700, y: 50, width: 72, height: 34},
@@ -75,6 +104,8 @@ define(["TrialTargetModel"],
         insert.children.push(table);
         view.children.push(macros);
 
+        //return [home, insert, pagelayout, references, mailings, review, view, italics, highlight, superscript, hyperlink, table, macros];
         return [home, insert, view, italics, highlight, superscript, hyperlink, table, macros];
+
 
 });
