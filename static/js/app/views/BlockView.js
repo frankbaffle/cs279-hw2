@@ -35,6 +35,7 @@ define([
         },
 
         onClick: function(target){
+            console.log(target.offsetX, target.offsetY, target);
             this.currentLog.clicks += 1;
             var x = target.offsetX;
             var y = target.offsetY;
@@ -43,13 +44,17 @@ define([
                 this.misClick(hit);
             } else {
                 if(hit.type == "tab"){
-                    if(this.task.interface == "CommandMaps"){
-                        this.misClick(hit);
-                    } else {
+                    if(this.task.interface != "CommandMaps"){
                         this.tabSwitch(hit);
+                    } else {
+                        this.misClick(hit);
                     }
                 } else {
-                    if (hit.name == this.currentTrial.name && hit.parent.name == this.currentTab){
+                    if ((hit.name == this.currentTrial.name
+                        && hit.parent.name == this.currentTab
+                        && this.task.interface != "CommandMaps")
+                        || (hit.name == this.currentTrial.name
+                            && this.task.interface == "CommandMaps")){
                         this.rightCommand(hit);
                     } else {
                         this.wrongCommand(hit);
