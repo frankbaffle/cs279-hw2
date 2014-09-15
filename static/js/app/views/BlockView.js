@@ -152,18 +152,21 @@ define([
             var scaleX = newWidth/actualWidth;
             var scaleY = newHeight/actualHeight;
 
-            console.log("actual width/height", actualWidth, actualHeight);
-            console.log("current width/height", newWidth, newHeight);
-            console.log("before", x, y);
-            x = x*scaleX;
-            y = y*scaleY;
-            console.log("after", x, y);
-
             var targetSet = this.task.commandSet;
             for(var i =-1;++i<targetSet.length;){
                 var target = targetSet[i];
                 var box = target.boundingBox;
-                if(x > box.x*scaleX && y > box.y*scaleY && x < (box.x+box.width)*scaleX && y < (box.y+box.height)*scaleY){
+                var sx = box.x*scaleX;
+                var sy = box.y*scaleY;
+                var ex = (box.x+box.width)*scaleX;
+                var ey = (box.y+box.height)*scaleY;
+                var r = Math.round;
+                /*
+                console.log(target.name);
+                console.log("sx < x < ex", r(sx), r(x), r(ex));
+                console.log("sy < y < ey", r(sy), r(y), r(ey));
+                */
+                if(x > sx && y > sy && x < ex && y < ey){
                     return target;
                 }
             }
