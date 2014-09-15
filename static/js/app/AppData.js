@@ -1,44 +1,124 @@
-define([
-    "data/CommandSet1",
-    "data/CommandSet2"],
-    function (cmdSet1, cmdSet2) {
+    define([
+        "data/CommandSet1",
+        "data/CommandSet2"],
+        function (cmdSet1, cmdSet2) {
 
-        var cmBlock = {interface: "CommandMaps", commandSet: cmdSet1};
-        var rBlock = {interface: "Ribbons", commandSet: cmdSet2};
+            var cmBlock = {interface: "CommandMaps", commandSet: cmdSet1};
+            var rBlock = {interface: "Ribbons", commandSet: cmdSet2};
 
-        var group1 = [cmBlock, rBlock];
-        var group2 = [rBlock, cmBlock];
+            var group1 = [cmBlock, rBlock];
+            var group2 = [rBlock, cmBlock];
 
-        function getTrials(num, commandSet){
-            var result = [];
-            var tabs = _.filter(commandSet, function(item){return item.type == "tabs"});
-            var commands = _.filter(commandSet, function(item){return item.type == "command"});
-            for (var i =-1;++i<num;){
-                var randomCommand = parseInt(Math.random()*commands.length);
-                var cmd = commands[randomCommand];
-                result.push(cmd);
+            function getTrials(num, commandSet){
+                //var _=require("underscore");
+
+                var H = Array.apply(null, new Array(num/2)).map(Number.prototype.valueOf,0);
+                var I = Array.apply(null, new Array(num/3)).map(Number.prototype.valueOf,1);
+                var V = Array.apply(null, new Array(num/6)).map(Number.prototype.valueOf,2);
+
+                var HI = H.concat(I);
+                var HIV = HI.concat(V);
+
+                var perm_HIV = shuffle(HIV);
+                //generate series of tabs with 50% tab switch
+                var counter = 0;
+                while (counter < perm_HIV.length/2){
+                    counter = 0;
+                for (i=0; i< perm_HIV.length-1; i++){
+                    if (perm_HIV[i] - perm_HIV[i+1] != 0){
+                        counter++;
+                    }
+                }
+                }
+
+                //assign commands to tabs
+                var Hcounter = 0;
+                var Icounter = 0;
+
+                var result = [];
+                var tabs = _.filter(commandSet, function(item){return item.type == "tabs"});
+                var commands = _.filter(commandSet, function(item){return item.type == "command"});
+                for (i=0; i< perm_HIV.length; i++){
+                    if (perm_HIV[i] == 0){
+                        if (Hcounter < 5){
+                            var cmd = commands[0];
+                            Hcounter++;
+                        }else if (Hcounter < 10){
+                            var cmd = commands[1];
+                            Hcounter++;
+                        }  else{
+                            var cmd = commands[2];
+                            Hcounter++;
+                        }
+                    }
+                    else if (perm_HIV[i] == 1){
+                        if (Icounter < 5){
+                            var cmd = commands[3];
+                            Icounter++;
+                        } else{
+                            var cmd = commands[4];
+                            Icounter++;
+                        }
+                    }
+                    else {
+                        var cmd = commands[5];
+                    } 
+
+                    result.push(cmd);
+                }
+
+                return result;    
+
+
+                /*
+                var result = [];
+                var tabs = _.filter(commandSet, function(item){return item.type == "tabs"});
+                var commands = _.filter(commandSet, function(item){return item.type == "command"});
+                for (var i =-1;++i<num;){
+                    var randomCommand = parseInt(Math.random()*commands.length);
+                    var cmd = commands[randomCommand];
+                    result.push(cmd);
+                }
+                return result;*/
+                
             }
-            return result;
-        }
 
-        function getTask(value, seedBlock, numTrials){
-            var task = _.clone(seedBlock);
-            task.block = value;
-            task.trials = getTrials(numTrials, seedBlock.commandSet);
-            return task;
-        }
+            function shuffle(array) {
+                var currentIndex = array.length, temporaryValue, randomIndex ;
 
-        var group = group1;
+                // While there remain elements to shuffle...
+                while (0 !== currentIndex) {
 
-        var tasks = [];
-        for(var i =-1; ++i<group.length;){
-            var block = group[i];
-            tasks.push(getTask("familiarize", block, 30));
-            tasks.push(getTask("perform", block, 90));
-        }
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
 
-        var data = {};
-        data['tasks'] = tasks;
-        return data;
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+                }
+                return array;
+            }
 
-});
+            function getTask(value, seedBlock, numTrials){
+                var task = _.clone(seedBlock);
+                task.block = value;
+                task.trials = getTrials(numTrials, seedBlock.commandSet);
+                return task;
+            }
+
+            var group = group1;
+
+            var tasks = [];
+            for(var i =-1; ++i<group.length;){
+                var block = group[i];
+                tasks.push(getTask("familiarize", block, 30));
+                tasks.push(getTask("perform", block, 90));
+            }
+
+            var data = {};
+            data['tasks'] = tasks;
+            return data;
+
+    });
