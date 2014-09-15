@@ -25,7 +25,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"row\">\n    <div class=\"col-md-2\">\n        <img id=\"commandImg\" src=\"img/icons/bold.png\" />\n    </div>\n    <div class=\"col-md-2\">\n        <p id=\"commandDescription\">bold</p>\n    </div>\n    <div class=\"col-md-8\">\n        <button id=\"next\" type=\"button\" class=\"btn btn-default\">Skip (testing only)</button>\n    </div>\n</div>\n<div class=\"row\">\n    <img id=\"layoutImg\" src=\"img/tabs/home_tab.png\" />\n</div>";
+  return "<div class=\"row\">\n    <div class=\"col-lg-10\" id=\"layoutColumn\">\n        <img class=\"unselectable img-responsive\" id=\"layoutImg\" src=\"img/tabs/home_tab.png\" />\n    </div>\n    <div class=\"col-lg-2 text-center\" id=\"infoColumn\">\n        <div class=\"text-center\">\n            <img id=\"commandImg\" class=\"unselectable\" src=\"img/icons/bold.png\" />\n        </div>\n        <p id=\"commandDescription\">bold</p>\n        <button id=\"next\" type=\"button\" class=\"btn btn-default\">Skip (testing only)</button>\n    </div>\n</div>";
   });
 
 this["cs279hw2"]["templates"]["Start"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

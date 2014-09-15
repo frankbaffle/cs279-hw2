@@ -34,7 +34,6 @@ define([
             return this;
         },
 
-
         /*onClick: function(target){
             if (this.startXY == null) {
                 this.startXY = [target.offsetX, target.offsetY];
@@ -48,11 +47,13 @@ define([
                 this.startXY = null;
             }
         },*/
+
         onClick: function(target){
-            console.log(target.offsetX, target.offsetY, target);
+            //console.log(target.offsetX, target.offsetY, target);
             this.currentLog.clicks += 1;
             var x = target.offsetX;
             var y = target.offsetY;
+
             var hit = this.hitTest(x, y);
             if(hit == null){
                 this.misClick(hit);
@@ -78,7 +79,6 @@ define([
         },
 
         start: function(){
-            console.log();
             this.currentTrial = this.trials[this.trialLog.length];
             this.currentLog = this.getNewLog();
             this.updateTrialDisplay();
@@ -142,11 +142,28 @@ define([
         },
 
         hitTest: function(x, y){
+
+            var actualWidth = $("#layoutImg")[0].naturalWidth;
+            var actualHeight = $("#layoutImg")[0].naturalHeight;
+
+            var newWidth = $("#layoutImg").width();
+            var newHeight = $("#layoutImg").height();
+
+            var scaleX = newWidth/actualWidth;
+            var scaleY = newHeight/actualHeight;
+
+            console.log("actual width/height", actualWidth, actualHeight);
+            console.log("current width/height", newWidth, newHeight);
+            console.log("before", x, y);
+            x = x*scaleX;
+            y = y*scaleY;
+            console.log("after", x, y);
+
             var targetSet = this.task.commandSet;
             for(var i =-1;++i<targetSet.length;){
                 var target = targetSet[i];
                 var box = target.boundingBox;
-                if(x > box.x && y > box.y && x < box.x+box.width && y < box.y+box.height){
+                if(x > box.x*scaleX && y > box.y*scaleY && x < (box.x+box.width)*scaleX && y < (box.y+box.height)*scaleY){
                     return target;
                 }
             }
