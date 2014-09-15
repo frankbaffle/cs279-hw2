@@ -19,20 +19,20 @@
       return array;
     }
 
-    var nrepeat = 5;
-    var H = Array.apply(null, new Array(nrepeat*3)).map(Number.prototype.valueOf,0);
-    var I = Array.apply(null, new Array(nrepeat*2)).map(Number.prototype.valueOf,1);
-    var V = Array.apply(null, new Array(nrepeat*1)).map(Number.prototype.valueOf,2);
+    var num = 30;
+    var H = Array.apply(null, new Array(num/2)).map(Number.prototype.valueOf,0);
+    var I = Array.apply(null, new Array(num/3)).map(Number.prototype.valueOf,1);
+    var V = Array.apply(null, new Array(num/6)).map(Number.prototype.valueOf,2);
 
     var HI = H.concat(I);
     var HIV = HI.concat(V);
 
-    var perm_HIV = shuffle(HIV);
-
-
+    var perm_HIV = [1, 1];
     var counter = 0;
+    //shuffle until more than 50% tab switch
     while (counter < perm_HIV.length/2){
-    	counter = 0;
+    var counter = 0;
+    var perm_HIV = shuffle(HIV);
     for (i=0; i< perm_HIV.length-1; i++){
     	if (perm_HIV[i] - perm_HIV[i+1] != 0){
     		counter++;
