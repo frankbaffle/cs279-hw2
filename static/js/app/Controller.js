@@ -24,6 +24,8 @@ define([
         EventBus.on("nasaCompleted", _.bind(this.nasaCompleted, this));
         EventBus.on("surveyCompleted", _.bind(this.surveyCompleted, this));
 
+        $("#nextBlockBtn").on("click", _.bind(this.nextBlockClicked, this));
+
         //this.stateModel.on("reset", _.bind(this.stateReset, this));
         //this.stateModel.on("change", _.bind(this.stateChange, this));
 
@@ -49,16 +51,26 @@ define([
     };
 
     Controller.prototype.startCompleted = function(){
+        var taskIndex = 0;
+        this.stateModel.set("task", taskIndex);
+        $("#start-container").removeClass("active");
+        this.startBlock();
+    };
+
+    Controller.prototype.startBlock = function() {
+        this.stateModel.set("state", "experiment");
+        $("#next-container").addClass("active");
+    };
+
+    Controller.prototype.nextBlockClicked = function(){
+        $("#next-container").removeClass("active");
+        this.displayBlock();
+    };
+
+    Controller.prototype.displayBlock = function() {
         var taskIndex = this.stateModel.get("task");
         var task = AppData.tasks[taskIndex];
 
-        this.stateModel.set("state", "experiment");
-        this.stateModel.set("task", taskIndex);
-        $("#start-container").removeClass("active");
-        this.startBlock(task);
-    };
-
-    Controller.prototype.startBlock = function(task){
         console.log("startBlock", task);
         var blockView = new BlockView();
         blockView.setTask(task);
@@ -69,6 +81,7 @@ define([
     };
 
     Controller.prototype.blockCompleted = function(){
+        $("#block-container").removeClass("active");
         var taskIndex = this.stateModel.get("task");
         taskIndex += 1;
         this.stateModel.set("task", taskIndex);
@@ -83,9 +96,7 @@ define([
     Controller.prototype.nextBlock = function(){
         var taskIndex = this.stateModel.get("task");
         if (taskIndex < AppData.tasks.length) {
-            var task = AppData.tasks[taskIndex];
-            this.stateModel.set("state", "experiment");
-            this.startBlock(task);
+            this.startBlock();
         } else {
             this.startSurvey();
         }
@@ -102,6 +113,7 @@ define([
 
     Controller.prototype.nasaCompleted = function(){
         console.log("nasaCompleted");
+        $("#block-container").removeClass("active");
         this.nextBlock();
     };
 

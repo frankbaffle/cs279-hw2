@@ -23,12 +23,11 @@
                 //generate series of tabs with 50% tab switch
                 var counter = 0;
                 while (counter < perm_HIV.length/2){
-                    counter = 0;
-                for (var i=0; i< perm_HIV.length-1; i++){
-                    if (perm_HIV[i] - perm_HIV[i+1] != 0){
-                        counter++;
+                    for (var i=0; i< perm_HIV.length-1; i++){
+                        if (perm_HIV[i] - perm_HIV[i+1] != 0){
+                            counter++;
+                        }
                     }
-                }
                 }
 
                 //assign commands to tabs

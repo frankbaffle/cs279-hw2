@@ -78,6 +78,7 @@ define([
         },
 
         start: function(){
+            console.log();
             this.currentTrial = this.trials[this.trialLog.length];
             this.currentLog = this.getNewLog();
             this.updateTrialDisplay();
