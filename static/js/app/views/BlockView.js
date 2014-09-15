@@ -95,7 +95,7 @@ define([
         },
 
         rightCommand: function(hit){
-            //this.beep2();
+            this.beep(true);
             this.currentLog.time = (new Date()) - this.currentLog.time;
             this.trialLog.push(this.currentLog);
             console.log("trial "+this.trialLog.length+" complete", this.currentLog);
@@ -111,12 +111,12 @@ define([
         },
 
         wrongCommand: function(hit){
-            this.beep();
+            this.beep(false);
             this.currentLog.wrongCommand += 1;
         },
 
         misClick: function(hit){
-            this.beep();
+            this.beep(false);
             this.currentLog.misClick += 1;
         },
 
@@ -130,7 +130,6 @@ define([
             }
         },
 
-        //TODO: display next trial using this.currentTrial
         updateTrialDisplay: function(){
             var name = this.currentTrial.name;
             console.log('updateTrialDisplay', name);
@@ -171,17 +170,16 @@ define([
             return null;
         },
 
-        beep: function(){
+        beep: function(correct){
             var soundHandle = document.getElementById('soundHandle');
-            soundHandle.src = 'sounds/incorrect.wav';
-            soundHandle.play();
+            if(correct){
+                soundHandle.src = 'sounds/correct.wav';
+                soundHandle.play();
+            } else {
+                soundHandle.src = 'sounds/incorrect.wav';
+                soundHandle.play();
+            }
         },
-
-        /*beep2: function(){
-            var soundHandle = document.getElementById('soundHandle');
-            soundHandle.src = 'sounds/correct.wav';
-            soundHandle.play();
-        },*/
 
         complete: function(){
             EventBus.trigger("blockCompleted", this);
