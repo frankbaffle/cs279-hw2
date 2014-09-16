@@ -176,10 +176,10 @@ define([
         beep: function(correct){
             var soundHandle = document.getElementById('soundHandle');
             if(correct){
-                soundHandle.src = 'sounds/correct.wav';
+                soundHandle.src = 'sounds/correct1.wav';
                 soundHandle.play();
             } else {
-                soundHandle.src = 'sounds/incorrect.wav';
+                soundHandle.src = 'sounds/incorrect1.wav';
                 soundHandle.play();
             }
         },
