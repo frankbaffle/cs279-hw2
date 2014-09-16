@@ -55,10 +55,12 @@ html, body {
 }
 
 #commandImg {
+    /*
     width: 75px;
     height: 75px;
     object-fit: contain;
     overflow: hidden;
+    */
 }
 
 .vertical-center-item {

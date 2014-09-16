@@ -51,8 +51,8 @@ define([
         onClick: function(target){
             //console.log(target.offsetX, target.offsetY, target);
             this.currentLog.clicks += 1;
-            var x = target.offsetX;
-            var y = target.offsetY;
+            var x = target.offsetX? target.offsetX : target.pageX;
+            var y = target.offsetY? target.offsetY : target.pageY;
 
             var hit = this.hitTest(x, y);
             if(hit == null){
@@ -82,6 +82,18 @@ define([
             this.currentTrial = this.trials[this.trialLog.length];
             this.currentLog = this.getNewLog();
             this.updateTrialDisplay();
+            this.setImageSize();
+        },
+
+        setImageSize: function(){
+            var img = $("#layoutImg");
+
+            this.actualWidth = img[0].naturalWidth? img[0].naturalWidth : img.width();
+            this.actualHeight = img[0].naturalHeight? img[0].naturalHeight : img.height();
+            Utils.getImgSize(img[0].src, _.bind(function(size){
+                this.actualWidth = size.width;
+                this.actualHeight = size.height;
+            }, this));
         },
 
         getNewLog: function(){
@@ -143,14 +155,11 @@ define([
 
         hitTest: function(x, y){
 
-            var actualWidth = $("#layoutImg")[0].naturalWidth;
-            var actualHeight = $("#layoutImg")[0].naturalHeight;
-
             var newWidth = $("#layoutImg").width();
             var newHeight = $("#layoutImg").height();
 
-            var scaleX = newWidth/actualWidth;
-            var scaleY = newHeight/actualHeight;
+            var scaleX = newWidth/this.actualWidth;
+            var scaleY = newHeight/this.actualHeight;
 
             var targetSet = this.task.commandSet;
             for(var i =-1;++i<targetSet.length;){
