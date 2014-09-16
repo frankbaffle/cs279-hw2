@@ -19,10 +19,13 @@
                 var HI = H.concat(I);
                 var HIV = HI.concat(V);
 
-                var perm_HIV = shuffle(HIV);
-                //generate series of tabs with 50% tab switch
+                var perm_HIV = [1, 1];
                 var counter = 0;
+                //var perm_HIV = shuffle(HIV);
+                //generate series of tabs with 50% tab switch
                 while (counter < perm_HIV.length/2){
+                    var counter = 0 
+                    var perm_HIV = shuffle(HIV);
                     for (var i=0; i< perm_HIV.length-1; i++){
                         if (perm_HIV[i] - perm_HIV[i+1] != 0){
                             counter++;
