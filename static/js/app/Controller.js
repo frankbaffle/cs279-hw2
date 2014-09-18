@@ -85,15 +85,14 @@ define([
     };
 
     Controller.prototype.blockCompleted = function(blockView){
-        var currentTrials = this.subjectModel.get("trials");
-        this.subjectModel.set("trials", currentTrials.concat(blockView.trialLog));
-
         $("#block-container").removeClass("active");
         var taskIndex = this.stateModel.get("task");
         taskIndex += 1;
         this.stateModel.set("task", taskIndex);
         var lastTask = this.appData.tasks[taskIndex-1];
         if(lastTask.block == "perform"){
+            var currentTrials = this.subjectModel.get("trials");
+            this.subjectModel.set("trials", currentTrials.concat(blockView.trialLog));
             this.startNasa();
         } else {
             this.nextBlock();
