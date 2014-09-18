@@ -18,8 +18,9 @@ define([
     };
 
     Main.prototype.init = function(){
+        console.log("Main.init");
+
         document.main = this;
-        this.appData = AppData.init(0);
 
         this.service = new Service();
 
@@ -27,14 +28,24 @@ define([
 
         //always reset the initial state for now.
         this.stateModel = new StateModel({id: "model.StateModel"});
-        this.stateModel.set("session", this.subjectModel.get("id"));
-        this.stateModel.save();
+
         //this.stateModel.fetch();
         //this.stateModel.fetch({reset:true});
-
-        console.log("Main.init");
         this.state = new State();
+
         this.controller = new Controller();
+
+
+        var initGroup = this.state.getQueryParamByName("group");
+        if(initGroup != null){
+            initGroup = parseInt(initGroup);
+            //console.log("group", initGroup, typeof(initGroup));
+            this.stateModel.set("group", initGroup);
+        }
+        this.stateModel.set("session", this.subjectModel.get("id"));
+        this.stateModel.save();
+
+        this.appData = AppData.init(this.stateModel.get("group"));
 
         this.state.init(this.stateModel);
         this.controller.init(this.stateModel, this.subjectModel, this.service, this.appData);

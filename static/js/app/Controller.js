@@ -95,7 +95,7 @@ define([
         if(lastTask.block == "perform"){
             var currentTrials = this.subjectModel.get("trials");
             this.subjectModel.set("trials", currentTrials.concat(blockView.trialLog));
-            this.startNasa();
+            this.startNasa(lastTask);
         } else {
             this.nextBlock();
         }
@@ -110,18 +110,27 @@ define([
         }
     };
 
-    Controller.prototype.startNasa = function(){
+    Controller.prototype.startNasa = function(task){
         console.log("startNasa");
-        var nasaView = new NasaView();
+        var nasaView = new NasaView(task);
         nasaView.render();
         $("#block-container").html(nasaView.el);
         $("#block-container").addClass("active");
         this.stateModel.set("state", "nasa");
     };
 
-    Controller.prototype.nasaCompleted = function(){
-        console.log("nasaCompleted");
+    Controller.prototype.nasaCompleted = function(nasaView){
+        console.log("nasaCompleted", nasaView.data);
         $("#block-container").removeClass("active");
+
+        var sData = this.subjectModel.attributes;
+        var data = {data: nasaView.data};
+        var session = sData.id;
+        data.group = sData.group;
+        data.interface = nasaView.task.interface;
+        data.timestamp = (new Date()).toISOString();
+        this.service.submitData("nasas", session, data);
+
         this.nextBlock();
     };
 
@@ -135,8 +144,16 @@ define([
         $("#survey-container").addClass("active");
     };
 
-    Controller.prototype.surveyCompleted = function(){
+    Controller.prototype.surveyCompleted = function(surveyView){
         console.log("surveyCompleted");
+
+        var sData = this.subjectModel.attributes;
+        var data = {data: surveyView.data};
+        var session = sData.id;
+        data.group = sData.group;
+        data.timestamp = (new Date()).toISOString();
+        this.service.submitData("surveys", session, data);
+
         this.displayThankYou();
     };
 
@@ -151,7 +168,7 @@ define([
         //var data = this.subjectModel.attributes;
         //this.service.submitSubjectLog(data.id, data);
     };
-    
+
     Controller.prototype.trialCompleted = function(blockView, log, logs, task){
         console.log("trial "+logs.length+" complete", log);
 
@@ -161,6 +178,8 @@ define([
         var session = sData.id;
         logData.group = sData.group;
         logData.block = task.block;
+        // we do it twice, but here seems more consistent.
+        logData.timestamp = (new Date()).toISOString();
 
         this.service.submitData("logs", session, logData);
     };

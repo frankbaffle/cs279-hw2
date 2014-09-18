@@ -38,6 +38,17 @@ define(["EventBus"],
             History.replaceState.apply(History, this.toStateParams(stateModel));
         };
 
+        State.prototype.getState = function() {
+            return History.getState();
+        };
+
+        State.prototype.getQueryParamByName = function(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results == null ? null : decodeURIComponent(results[1].replace(/\+/g, " "));
+        };
+
         /*
         History.pushState({state:1}, "State 1", "?state=1"); // logs {state:1}, "State 1", "?state=1"
         History.pushState({state:2}, "State 2", "?state=2"); // logs {state:2}, "State 2", "?state=2"

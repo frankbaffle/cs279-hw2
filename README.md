@@ -15,7 +15,7 @@ Mongo
  - collections
    - logs
    - surveys
-   - nasa
+   - nasas
 
 TODO:
 
@@ -30,13 +30,13 @@ TODO:
   + Timestamp
   + Name of command
   + Interface
-  - Identifier
+  + Identifier
 
 - Survey/Nasa
   - No default on survey (required fields + submit).
   - Log nasa, survey.
 
-- Parametrize group
++ Parametrize group
 
 Questions to post:
 + Next after each trial?

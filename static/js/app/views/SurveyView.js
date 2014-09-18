@@ -9,8 +9,11 @@ define([
         template: cs279hw2.templates.Survey,
 
         events: {
+            "click input": "inputClick",
             "click #next": "nextClicked"
         },
+
+        data: {},
 
         initialize: function(){
             console.log("SurveyView.initialize");
@@ -25,6 +28,31 @@ define([
             //var compiledTemplate = this.template(this.model.attributes);
             var compiledTemplate = this.template();
             this.$el.html(compiledTemplate);
+        },
+
+        inputClick: function(target){
+            var inputs = this.$el.find("input");
+            var typesOk = {};
+            for(var i=-1;++i<inputs.length;){
+                var input = $(inputs[i]);
+                var name = input.attr("name");
+                var checked = input[0].checked;
+                if(checked){
+                    this.data[name] = input.val();
+                }
+                if(typesOk[name] != true){
+                    typesOk[name] = checked;
+                }
+            }
+            var check = true;
+            for(var n in typesOk){
+                console.log(n, typesOk[n]);
+                check &= typesOk[n];
+            }
+            console.log("check", check);
+            if(check){
+                this.$el.find("#next").attr("disabled", null);
+            }
         },
 
         nextClicked: function(target){

@@ -10,6 +10,7 @@ define([], function () {
             return {
                 session: "",
                 state: "start",
+                group: 0,
                 task: 0,
                 trial: 0
             };

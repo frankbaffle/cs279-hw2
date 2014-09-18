@@ -103,7 +103,7 @@ define([
                 tabSwitch = lastTrial.parent.name != this.currentTrial.parent.name;
             }
             var command = this.currentTrial.name;
-            var timestamp = (new Date()).toString();
+            var timestamp = (new Date()).toISOString();
 
             return {
                 time: new Date(),
