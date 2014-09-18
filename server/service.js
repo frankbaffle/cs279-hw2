@@ -8,14 +8,16 @@ var MongoClient = require("mongodb").MongoClient,
 
 exports = module.exports = MongoService;
 
-function MongoService(){
 
+function MongoService(){
+    this.dbName = "cs279_hw2";
+    //this.subjectsCollection = "subjects";
 }
 
 var prototype = MongoService.prototype;
 
 prototype.open = function(callback){
-    MongoClient.connect("mongodb://localhost:27017/cs279", {}, function(err, db) {
+    MongoClient.connect("mongodb://localhost:27017/"+this.dbName, {}, function(err, db) {
         if (err) {
             console.log(err);
         }
@@ -28,17 +30,17 @@ prototype.close = function(){
     this.db.close();
 };
 
-prototype.addLog = function(session, doc, cb){
-    var collection = this.db.collection('hw2logs');
+prototype.addDoc = function(collName, session, doc, cb){
+    var collection = this.db.collection(collName);
     doc.session = session;
     collection.insert(doc, {w:1}, function(err, result) {
         cb(err, result);
     });
 };
 
-prototype.getLog = function(session, cb){
-    var collection = this.db.collection('hw2logs');
-    collection.findOne({session: session}, null, {}, function(err, result) {
-        cb(err, result);
+prototype.getDocs = function(collName, session, cb){
+    var collection = this.db.collection(collName);
+    collection.find({session: session}, null, {}, function(err, cursor) {
+        cursor.toArray(cb);
     });
 };

@@ -10,10 +10,9 @@ define([
 
     };
 
-    Service.prototype.submitLog = function(session, log){
-        console.log("submitLog", session, log);
-        var url = "http://localhost:8000/logs/"+session;
-        var data = log;
+    Service.prototype.submitData = function(collection, session, data){
+        console.log("submitSubjectLog ", session, data);
+        var url = "http://localhost:8000/"+collection+"/"+session;
 
         $.ajax({
             type: "POST",

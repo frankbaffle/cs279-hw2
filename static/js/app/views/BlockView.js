@@ -97,9 +97,9 @@ define([
         },
 
         getNewLog: function(lastTrial){
-            var interface = this.task.block.interface;
+            var eInterface = this.task.interface;
             var tabSwitch = false;
-            if (interface === "Ribbons"){
+            if (eInterface === "Ribbons"){
                 tabSwitch = lastTrial.parent.name != this.currentTrial.parent.name;
             }
             var command = this.currentTrial.name;
@@ -112,7 +112,7 @@ define([
                 clicks: 0,
                 tabSwitches: 0,
                 tabSwitch: tabSwitch,
-                interface: interface,
+                interface: eInterface,
                 command: command,
                 timestamp: timestamp
             }
@@ -122,7 +122,7 @@ define([
             this.beep(true);
             this.currentLog.time = (new Date()) - this.currentLog.time;
             this.trialLog.push(this.currentLog);
-            console.log("trial "+this.trialLog.length+" complete", this.currentLog);
+            EventBus.trigger("trialCompleted", this, this.currentLog, this.trialLog, this.task);
 
             if(this.trialLog.length < this.trials.length){
                 var lastTrial = this.currentTrial;

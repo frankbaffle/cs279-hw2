@@ -23,14 +23,14 @@ define([
 
         this.service = new Service();
 
+        this.subjectModel = new SubjectModel();
+
         //always reset the initial state for now.
         this.stateModel = new StateModel({id: "model.StateModel"});
+        this.stateModel.set("session", this.subjectModel.get("id"));
         this.stateModel.save();
-
         //this.stateModel.fetch();
         //this.stateModel.fetch({reset:true});
-
-        this.subjectModel = new SubjectModel();
 
         console.log("Main.init");
         this.state = new State();

@@ -11,8 +11,11 @@ node app.js
 Details:
 
 Mongo
- - db = cs279
- - collection = hw2logs
+ - db = cs279_hw2
+ - collections
+   - logs
+   - surveys
+   - nasa
 
 TODO:
 

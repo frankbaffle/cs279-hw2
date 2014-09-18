@@ -4,11 +4,11 @@ exports.service = null;
 
 exports.router = express.Router();
 
-exports.router.post('/logs/:session', function(req, res) {
-    //console.log(req.params, req.body, exports.service);
+exports.router.post('/:collection/:session', function(req, res) {
+    var collection = req.params.collection;
     var session = req.params.session;
-    var log = req.body;
-    exports.service.addLog(session, log, function(err, result){
+    var doc = req.body;
+    exports.service.addDoc(collection, session, doc, function(err, result){
         console.log(err, result);
         if(err != null){
             res.json({"message": "error", error: err.toString(), result: result});
@@ -18,9 +18,10 @@ exports.router.post('/logs/:session', function(req, res) {
     });
 }.bind(this));
 
-exports.router.get('/logs/:session', function(req, res) {
+exports.router.get('/:collection/:session', function(req, res) {
+    var collection = req.params.collection;
     var session = req.params.session;
-    exports.service.getLog(session, function(err, result){
+    exports.service.getDocs(collection, session, function(err, result){
         if(err != null){
             res.json({"message": "error", error: err.toString(), result: result});
         } else {

@@ -25,6 +25,7 @@ define([
         EventBus.on("start", _.bind(this.displayStart, this));
         EventBus.on("startCompleted", _.bind(this.startCompleted, this));
         EventBus.on("blockCompleted", _.bind(this.blockCompleted, this));
+        EventBus.on("trialCompleted", _.bind(this.trialCompleted, this));
         EventBus.on("nasaCompleted", _.bind(this.nasaCompleted, this));
         EventBus.on("surveyCompleted", _.bind(this.surveyCompleted, this));
 
@@ -86,6 +87,7 @@ define([
 
     Controller.prototype.blockCompleted = function(blockView){
         $("#block-container").removeClass("active");
+        this.stateModel.set("trial", 0);
         var taskIndex = this.stateModel.get("task");
         taskIndex += 1;
         this.stateModel.set("task", taskIndex);
@@ -146,9 +148,23 @@ define([
         $("#survey-container").removeClass("active");
         $("#thankyou-container").addClass("active");
 
-        var data = this.subjectModel.attributes;
-        this.service.submitLog(data.id, data)
+        //var data = this.subjectModel.attributes;
+        //this.service.submitSubjectLog(data.id, data);
     };
+    
+    Controller.prototype.trialCompleted = function(blockView, log, logs, task){
+        console.log("trial "+logs.length+" complete", log);
+
+        this.stateModel.set("trial", logs.length);
+        var sData = this.subjectModel.attributes;
+        var logData = _.clone(log);
+        var session = sData.id;
+        logData.group = sData.group;
+        logData.block = task.block;
+
+        this.service.submitData("logs", session, logData);
+    };
+
     return Controller;
 
 });

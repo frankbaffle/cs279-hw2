@@ -8,6 +8,7 @@ define([], function () {
         localStorage: new Backbone.LocalStorage('model.StateModel'),
         defaults: function() {
             return {
+                session: "",
                 state: "start",
                 task: 0,
                 trial: 0
