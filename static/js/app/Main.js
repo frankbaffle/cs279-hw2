@@ -45,8 +45,8 @@ define([
 
         EventBus.trigger("start", this);
 
-        var data = this.subjectModel.attributes;
-        this.service.submitLog(data.id, data);
+        //var data = this.subjectModel.attributes;
+        //this.service.submitLog(data.id, data);
 
     };
 
