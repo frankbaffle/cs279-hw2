@@ -1,22 +1,26 @@
 define([
     "EventBus",
     "Utils",
-    "AppData",
     "views/StartView",
     "views/BlockView",
     "views/NasaView",
     "views/SurveyView",
     "views/ThankYouView"
-], function (EventBus, Utils, AppData,
+], function (EventBus, Utils,
              StartView, BlockView, NasaView, SurveyView, ThankYouView) {
 
     function Controller(){
+        this.stateModel = null;
         this.subjectModel = null;
+        this.service = null;
+        this.appData = null;
     }
 
-    Controller.prototype.init = function(stateModel, subjectModel){
+    Controller.prototype.init = function(stateModel, subjectModel, service, appData){
         this.stateModel = stateModel;
         this.subjectModel = subjectModel;
+        this.service = service;
+        this.appData = appData;
 
         EventBus.on("start", _.bind(this.displayStart, this));
         EventBus.on("startCompleted", _.bind(this.startCompleted, this));
@@ -69,7 +73,7 @@ define([
 
     Controller.prototype.displayBlock = function() {
         var taskIndex = this.stateModel.get("task");
-        var task = AppData.tasks[taskIndex];
+        var task = this.appData.tasks[taskIndex];
 
         console.log("startBlock", task);
         var blockView = new BlockView();
@@ -80,12 +84,15 @@ define([
         blockView.start();
     };
 
-    Controller.prototype.blockCompleted = function(){
+    Controller.prototype.blockCompleted = function(blockView){
+        var currentTrials = this.subjectModel.get("trials");
+        this.subjectModel.set("trials", currentTrials.concat(blockView.trialLog));
+
         $("#block-container").removeClass("active");
         var taskIndex = this.stateModel.get("task");
         taskIndex += 1;
         this.stateModel.set("task", taskIndex);
-        var lastTask = AppData.tasks[taskIndex-1];
+        var lastTask = this.appData.tasks[taskIndex-1];
         if(lastTask.block == "perform"){
             this.startNasa();
         } else {
@@ -95,7 +102,7 @@ define([
 
     Controller.prototype.nextBlock = function(){
         var taskIndex = this.stateModel.get("task");
-        if (taskIndex < AppData.tasks.length) {
+        if (taskIndex < this.appData.tasks.length) {
             this.startBlock();
         } else {
             this.startSurvey();
@@ -140,7 +147,9 @@ define([
         $("#survey-container").removeClass("active");
         $("#thankyou-container").addClass("active");
 
-    }
+        var data = this.subjectModel.attributes;
+        this.service.submitLog(data.id, data)
+    };
     return Controller;
 
 });

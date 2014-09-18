@@ -5,7 +5,12 @@ define(["Utils"],
 
         defaults: function() {
             return {
-                id: Utils.getSubjectId()
+                id: Utils.getSubjectId(),
+                group: 0,
+                commandMapsNasa: {},
+                ribbonsNasa: {},
+                survey: {},
+                trials: []
             };
         }
     });

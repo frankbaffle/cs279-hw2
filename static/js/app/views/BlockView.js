@@ -80,7 +80,7 @@ define([
 
         start: function(){
             this.currentTrial = this.trials[this.trialLog.length];
-            this.currentLog = this.getNewLog();
+            this.currentLog = this.getNewLog({parent: {name: "home"}});
             this.updateTrialDisplay();
             this.setImageSize();
         },
@@ -96,13 +96,25 @@ define([
             }, this));
         },
 
-        getNewLog: function(){
+        getNewLog: function(lastTrial){
+            var interface = this.task.block.interface;
+            var tabSwitch = false;
+            if (interface === "Ribbons"){
+                tabSwitch = lastTrial.parent.name != this.currentTrial.parent.name;
+            }
+            var command = this.currentTrial.name;
+            var timestamp = (new Date()).toString();
+
             return {
                 time: new Date(),
                 wrongCommand: 0,
                 misClick: 0,
                 clicks: 0,
-                tabSwitches: 0
+                tabSwitches: 0,
+                tabSwitch: tabSwitch,
+                interface: interface,
+                command: command,
+                timestamp: timestamp
             }
         },
 
@@ -113,8 +125,9 @@ define([
             console.log("trial "+this.trialLog.length+" complete", this.currentLog);
 
             if(this.trialLog.length < this.trials.length){
+                var lastTrial = this.currentTrial;
                 this.currentTrial = this.trials[this.trialLog.length];
-                this.currentLog = this.getNewLog();
+                this.currentLog = this.getNewLog(lastTrial);
                 this.updateTrialDisplay();
             } else {
                 this.complete();
