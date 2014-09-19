@@ -41,3 +41,7 @@ TODO:
 Questions to post:
 + Next after each trial?
 + Require toggling CM?
+
+Note for Experiment:
+to start the program in group1 mode, use http://localhost:8000/?group=1
+to start the program in group0 mode, use http://localhost:8000/?group=0
