@@ -45,8 +45,9 @@ define([
         this.stateModel.set("session", this.subjectModel.get("id"));
         this.stateModel.save();
 
+        this.subjectModel.set("group", this.stateModel.get("group"));
         this.appData = AppData.init(this.stateModel.get("group"));
-
+        
         this.state.init(this.stateModel);
         this.controller.init(this.stateModel, this.subjectModel, this.service, this.appData);
 

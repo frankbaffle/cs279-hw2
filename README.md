@@ -17,14 +17,13 @@ Mongo
    - surveys
    - nasas
 
-TODO:
+TODOs:
 
 - Preload images
 + Database hookup
 - CSV export
 
-
-- Logs
++ Logs
   + Add group (interface order)
   + Required tab switch (already have # tab switches)
   + Timestamp
@@ -32,9 +31,9 @@ TODO:
   + Interface
   + Identifier
 
-- Survey/Nasa
-  - No default on survey (required fields + submit).
-  - Log nasa, survey.
++ Survey/Nasa
+  + No default on survey (required fields + submit).
+  + Log nasa, survey.
 
 + Parametrize group
 
