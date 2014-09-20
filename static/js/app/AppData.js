@@ -2,6 +2,51 @@
         "data/CommandSet1",
         "data/CommandSet2"],
         function (cmdSet1, cmdSet2) {
+            
+            function testTrials(task){
+                var trials = task.trials;
+                var ok = true;
+                var commandMap = {};
+                for(var i =-1;++i<task.commandSet.length;){
+                    var command = task.commandSet[i];
+                    if(command.type != "command"){
+                        continue;
+                    }
+                    commandMap[command.name] = 0;
+                }
+
+                if(task.block == "familiarize"){
+                    if(trials.length != 30){
+                        console.log("wrong trial length", task);
+                    }
+                    for(var j =-1;++j<trials.length;){
+                        commandMap[trials[j].name] += 1;
+                    }
+                    console.log("testing", task.block, "commandMap", commandMap);
+                    for(var key in commandMap){
+                        if(commandMap[key] != 5){
+                            console.log("wrong # trials for", key, "in", task.block, "found", commandMap[key], "expecting", 5);
+                        }
+                    }
+                }
+                
+                if(task.block == "perform"){
+                    if(trials.length != 90){
+                        console.log("wrong trial length", task);
+                    }
+                    for(var j =-1;++j<trials.length;){
+                        commandMap[trials[j].name] += 1;
+                    }
+                    console.log("testing", task.block, "commandMap", commandMap);
+                    for(var key in commandMap){
+                        if(commandMap[key] != 15){
+                            console.log("wrong # trials for", key, "in", task.block, "found", commandMap[key], "expecting", 15);
+                        }
+                    }
+                }
+                
+            }
+            
             return {
                 init: function(groupNum){
                     var cmBlock = {interface: "CommandMaps", commandSet: cmdSet1};
@@ -39,16 +84,18 @@
                         //assign commands to tabs
                         var Hcounter = 0;
                         var Icounter = 0;
-
+                        
+                        var commandNum = parseInt(num/6);
+                        
                         var result = [];
                         var tabs = _.filter(commandSet, function(item){return item.type == "tabs"});
                         var commands = _.filter(commandSet, function(item){return item.type == "command"});
                         for (var i=0; i< perm_HIV.length; i++){
                             if (perm_HIV[i] == 0){
-                                if (Hcounter < 5){
+                                if (Hcounter < commandNum){
                                     var cmd = commands[0];
                                     Hcounter++;
-                                }else if (Hcounter < 10){
+                                }else if (Hcounter < commandNum*2){
                                     var cmd = commands[1];
                                     Hcounter++;
                                 }  else{
@@ -57,7 +104,7 @@
                                 }
                             }
                             else if (perm_HIV[i] == 1){
-                                if (Icounter < 5){
+                                if (Icounter < commandNum){
                                     var cmd = commands[3];
                                     Icounter++;
                                 } else{
@@ -121,7 +168,12 @@
                         tasks.push(getTask("familiarize", block, 30));
                         tasks.push(getTask("perform", block, 90));
                     }
-
+                    
+                    testTrials(tasks[0]);
+                    testTrials(tasks[1]);
+                    testTrials(tasks[2]);
+                    testTrials(tasks[3]);
+                    
                     console.log(tasks);
 
                     var data = {};
