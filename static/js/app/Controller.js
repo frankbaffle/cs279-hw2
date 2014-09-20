@@ -171,13 +171,17 @@ define([
 
     Controller.prototype.trialCompleted = function(blockView, log, logs, task){
         console.log("trial "+logs.length+" complete", log);
-
+        if(task.block == "familiarize"){
+            return;
+        }
+        
         this.stateModel.set("trial", logs.length);
         var sData = this.subjectModel.attributes;
         var logData = _.clone(log);
         var session = sData.id;
         logData.group = sData.group;
         logData.block = task.block;
+
         // we do it twice, but here seems more consistent.
         logData.timestamp = (new Date()).toISOString();
 
