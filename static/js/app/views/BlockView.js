@@ -99,9 +99,9 @@ define([
         getNewLog: function(lastTrial){
             var eInterface = this.task.interface;
             var tabSwitch = false;
-            if (eInterface === "Ribbons"){
-                tabSwitch = lastTrial.parent.name != this.currentTrial.parent.name;
-            }
+            //if (eInterface === "Ribbons"){
+            tabSwitch = lastTrial.parent.name != this.currentTrial.parent.name;
+            //}
             var command = this.currentTrial.name;
             var timestamp = (new Date()).toISOString();
 
