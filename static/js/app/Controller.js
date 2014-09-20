@@ -174,7 +174,7 @@ define([
         if(task.block == "familiarize"){
             return;
         }
-        
+
         this.stateModel.set("trial", logs.length);
         var sData = this.subjectModel.attributes;
         var logData = _.clone(log);

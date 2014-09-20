@@ -6,13 +6,28 @@ var path = require('path');
 var router = require("./server/router");
 var service = require("./server/service");
 
+var appA
+console.log();
+//var test = process.argv[];
+
 var serviceInstance = null;
 var app = null;
 
-openService();
+init();
 
-function openService(){
-    serviceInstance = new service();
+function init(){
+    var args = process.argv.slice(2);
+    var test = false;
+    if(args.length > 0){
+        if(args[0] === "test"){
+            test = true;
+        }
+    }
+    openService(test);
+}
+
+function openService(test){
+    serviceInstance = new service(test);
     serviceInstance.open(serviceOpened.bind(this));
 }
 
