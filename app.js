@@ -6,8 +6,6 @@ var path = require('path');
 var router = require("./server/router");
 var service = require("./server/service");
 
-var appA
-console.log();
 //var test = process.argv[];
 
 var serviceInstance = null;
@@ -17,6 +15,7 @@ init();
 
 function init(){
     var args = process.argv.slice(2);
+    console.log("arguments:", args);
     var test = false;
     if(args.length > 0){
         if(args[0] === "test"){
