@@ -12,8 +12,8 @@ define([
 
     Service.prototype.submitData = function(collection, session, data){
         console.log("submitSubjectLog ", session, data);
-        var url = "http://localhost:8000/"+collection+"/"+session;
-
+        var url = "http://"+document.domain+":8000/"+collection+"/"+session;
+	
         $.ajax({
             type: "POST",
             url: url,
