@@ -6,17 +6,19 @@ var path = require('path');
 var router = require("./server/router");
 var service = require("./server/service");
 
-//var test = process.argv[];
-
 var serviceInstance = null;
 var app = null;
 
-init();
+//init();
+exports.init = init;
+exports.openService = openService;
 
-function init(){
+function init(test){
+    if(test == null){
+        test = false;
+    }
     var args = process.argv.slice(2);
     console.log("arguments:", args);
-    var test = false;
     if(args.length > 0){
         if(args[0] === "test"){
             test = true;
