@@ -1,0 +1,5 @@
+data.mental,data.physical,data.temporal,data.performance,data.effort,data.frustration,group,interface,session,_id
+"1","4","4","3","1","1","0","CommandMaps","8ce1c128d95b526f551652c0e7cb28904e6f28cd",ObjectID(541de7850d74e2cf5772cac3)
+"3","2","3","2","4","3","0","Ribbons","8ce1c128d95b526f551652c0e7cb28904e6f28cd",ObjectID(541de8ef0d74e2cf5772cb1e)
+"1","2","3","3","2","2","1","Ribbons","fa44a60aacc888532a336fffd44409a4bfd7e937",ObjectID(541df10204bc077560ba6432)
+"1","2","3","4","2","1","1","CommandMaps","fa44a60aacc888532a336fffd44409a4bfd7e937",ObjectID(541df19d04bc077560ba648d)
