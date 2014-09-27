@@ -171,11 +171,11 @@ define([
 
     Controller.prototype.trialCompleted = function(blockView, log, logs, task){
         console.log("trial "+logs.length+" complete", log);
+        this.stateModel.set("trial", logs.length);
         if(task.block == "familiarize"){
             return;
         }
 
-        this.stateModel.set("trial", logs.length);
         var sData = this.subjectModel.attributes;
         var logData = _.clone(log);
         var session = sData.id;
