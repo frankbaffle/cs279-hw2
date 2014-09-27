@@ -160,7 +160,7 @@ define([
             console.log('updateTrialDisplay', name);
             try {
                 $("#commandImg").attr("src", "img/icons/"+name+".png");
-                $("#commandDescription").html(name);
+                $("#commandDescription").html(name.toUpperCase());
             } catch(e){
 
             }
@@ -196,12 +196,12 @@ define([
         },
 
         beep: function(correct){
-            var soundHandle = document.getElementById('soundHandle');
+            var soundHandle;
             if(correct){
-                soundHandle.src = 'sounds/correct1.wav';
+                soundHandle = document.getElementById('soundCorrect');
                 soundHandle.play();
             } else {
-                soundHandle.src = 'sounds/incorrect1.wav';
+                soundHandle = document.getElementById('soundIncorrect');
                 soundHandle.play();
             }
         },

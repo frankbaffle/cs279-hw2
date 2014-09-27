@@ -13,32 +13,26 @@ var app = null;
 exports.init = init;
 exports.openService = openService;
 
-function init(test){
-    if(test == null){
-        test = false;
+function init(suffix){
+    if(suffix == null){
+        suffix = "";
     }
-    var args = process.argv.slice(2);
-    console.log("arguments:", args);
-    if(args.length > 0){
-        if(args[0] === "test"){
-            test = true;
-        }
-    }
-    openService(test);
+    openService(suffix);
 }
 
-function openService(test){
-    serviceInstance = new service(test);
+function openService(suffix){
+    serviceInstance = new service(suffix);
     serviceInstance.open(serviceOpened.bind(this));
 }
 
 function serviceOpened(err, db){
     var ok = err==null;
-    console.log("db service ok?", ok);
     if(!ok){
+        console.log("\nDatabase not ok\n");
         console.log(err);
         return;
     }
+    console.log("Mongo Database:", db.databaseName);
     initServer.bind(this)();
 }
 
@@ -47,11 +41,11 @@ function initServer(){
     app = express();
     app.set('port', 8000);
     app.use(express.static(path.join(__dirname, 'static')));
-    app.use(bodyParser());
+    app.use(bodyParser.json());
     app.use(router.router);
     http.createServer(app).listen(app.get('port'), null, serverCreated);
 }
 
 function serverCreated(){
-    console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server:', app.get('port'));
 }

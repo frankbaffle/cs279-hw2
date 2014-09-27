@@ -5,8 +5,12 @@ define([
     "Controller",
     "EventBus",
     "services/Service",
-    "AppData"
-    ], function(StateModel, SubjectModel, State, Controller, EventBus, Service, AppData) {
+    "Utils",
+    "AppData",
+    "data/CommandSet1",
+    "data/CommandSet2"
+    ], function(StateModel, SubjectModel, State, Controller, EventBus, Service, Utils,
+                AppData, CommandSet1, CommandSet2) {
 
     var Main = function(){
         this.stateModel = null;
@@ -59,6 +63,22 @@ define([
 
         //var data = this.subjectModel.attributes;
         //this.service.submitLog(data.id, data);
+
+        var imageSrc = [{name: "commandmap", src: "img/tabs/commandmap_layout.png"}];
+        //var cmdNames = _.map(CommandSet1.concat(CommandSet2), function(cmd){return cmd.name});
+        var cmds = CommandSet1.concat(CommandSet2);
+        for(var i =-1;++i<cmds.length;){
+            var cmd = cmds[i];
+            if(cmd.type == "tab"){
+                imageSrc.push({name: cmd.name+"_tab", src: "img/tabs/"+cmd.name+"_tab.png"});
+            } else {
+                imageSrc.push({name: cmd.name, src: "img/icons/"+cmd.name+".png"});
+            }
+        }
+
+        Utils.preloadImages(imageSrc, function(images){
+            console.log('images loaded', images);
+        });
 
     };
 

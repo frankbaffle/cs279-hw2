@@ -15,20 +15,13 @@ html, body {
     vertical-align: middle;
 }
 
-.row {
-    margin: 0 auto;
+.expand {
+    height: 100%;
+    width: 100%;
 }
 
-.unselectable {
-    /* For Opera and <= IE9, we need to add unselectable="on" attribute onto each element */
-    /* Check this site for more details: http://help.dottoro.com/lhwdpnva.php */
-    -moz-user-select: none; /* These user-select properties are inheritable, used to prevent text selection */
-    -webkit-user-select: none;
-    -ms-user-select: none; /* From IE10 only */
-    user-select: none; /* Not valid CSS yet, as of July 2012 */
-
-    -webkit-user-drag: none; /* Prevents dragging of images/divs etc */
-    user-drag: none;
+.row {
+    margin: 0 auto;
 }
 
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
@@ -46,12 +39,39 @@ html, body {
     padding: 0;
 }
 
+.vertical-center-item {
+    position:absolute; top:50%;
+    width: 100%;
+}
+
+.horizontal-center-item {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: -10px;
+}
+
+.unselectable {
+    /* For Opera and <= IE9, we need to add unselectable="on" attribute onto each element */
+    /* Check this site for more details: http://help.dottoro.com/lhwdpnva.php */
+    -moz-user-select: none; /* These user-select properties are inheritable, used to prevent text selection */
+    -webkit-user-select: none;
+    -ms-user-select: none; /* From IE10 only */
+    user-select: none; /* Not valid CSS yet, as of July 2012 */
+
+    -webkit-user-drag: none; /* Prevents dragging of images/divs etc */
+    user-drag: none;
+}
+
 #layoutColumn {
-    padding-right: 5px;
+    float: left;
+}
+
+#layoutImg {
 }
 
 #infoColumn {
-    padding-left: 5px;
+    padding: 10px;
 }
 
 #commandImg {
@@ -63,13 +83,3 @@ html, body {
     */
 }
 
-.vertical-center-item {
-    position:absolute; top:50%;
-}
-
-.horizontal-center-item {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: -10px;
-}

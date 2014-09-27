@@ -8,13 +8,8 @@ var MongoClient = require("mongodb").MongoClient,
 
 exports = module.exports = MongoService;
 
-function MongoService(test){
-    if(test){
-        this.dbName = "cs279_hw2_test";
-    } else {
-        this.dbName = "cs279_hw2";
-    }
-    //this.subjectsCollection = "subjects";
+function MongoService(suffix){
+    this.dbName = "cs279_hw2"+suffix;
 }
 
 var prototype = MongoService.prototype;
