@@ -7,7 +7,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"row\">\n    <div id=\"layoutColumn\" class=\"col-xs-6 col-lg-8\">\n        <img class=\"unselectable img-responsive\" id=\"layoutImg\" src=\"img/tabs/commandmap_layout.png\" />\n    </div>\n    <div class=\"col-xs-6 col-lg-4\">\n        <!-- <button id=\"next\" type=\"button\" class=\"btn btn-default\">Skip (testing only)</button> -->\n        <div id=\"infoColumn\">\n            <div class=\"panel panel-default\">\n                <div id=\"commandDescription\" class=\"panel-heading text-center\"></div>\n                <div class=\"panel-body text-center\">\n                    <img id=\"commandImg\" class=\"unselectable\" src=\"img/icons/bold.png\" />\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
+  return "<div class=\"row\">\n    <div id=\"layoutColumn\" class=\"col-xs-6 col-lg-8\">\n        <img class=\"unselectable img-responsive\" id=\"layoutImg\" src=\"img/tabs/commandmap_layout.png\" />\n    </div>\n    <div class=\"col-xs-6 col-lg-4\">\n        <div id=\"infoColumn\">\n            <div class=\"panel panel-default\">\n                <div id=\"commandDescription\" class=\"panel-heading text-center\"></div>\n                <div class=\"panel-body text-center\">\n                    <img id=\"commandImg\" class=\"unselectable\" src=\"img/icons/bold.png\" />\n                    <br>\n                    <button id=\"next\" type=\"button\" class=\"btn btn-default hidden\">skip</button>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
   });
 
 this["cs279hw2"]["templates"]["Nasa"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -25,7 +25,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"row\">\n    <div class=\"col-lg-10\" id=\"layoutColumn\">\n        <img class=\"unselectable img-responsive\" id=\"layoutImg\" src=\"img/tabs/home_tab.png\" />\n    </div>\n    <div class=\"col-lg-2 text-center\" id=\"infoColumn\">\n        <!-- <button id=\"next\" type=\"button\" class=\"btn btn-default\">Skip (testing only)</button> -->\n        <p id=\"commandDescription\">bold</p>\n        <div class=\"text-center\">\n            <img id=\"commandImg\" class=\"unselectable\" src=\"img/icons/bold.png\" />\n        </div>\n    </div>\n</div>";
+  return "<div class=\"row\">\n    <div id=\"layoutColumn\" class=\"col-xs-6 col-lg-8\">\n        <img class=\"unselectable img-responsive\" id=\"layoutImg\" src=\"img/tabs/home_tab.png\" />\n    </div>\n    <div class=\"col-xs-6 col-lg-4\">\n        <div id=\"infoColumn\">\n            <div class=\"panel panel-default\">\n                <div id=\"commandDescription\" class=\"panel-heading text-center\"></div>\n                <div class=\"panel-body text-center\">\n                    <img id=\"commandImg\" class=\"unselectable\" src=\"img/icons/bold.png\" />\n                    <br>\n                    <button id=\"next\" type=\"button\" class=\"btn btn-default hidden\">skip</button>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
   });
 
 this["cs279hw2"]["templates"]["Start"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

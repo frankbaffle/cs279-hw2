@@ -8,6 +8,7 @@ exports.router.post('/:collection/:session', function(req, res) {
     var collection = req.params.collection;
     var session = req.params.session;
     var doc = req.body;
+    console.log(doc);
     exports.service.addDoc(collection, session, doc, function(err, result){
         console.log(err, result);
         if(err != null){
