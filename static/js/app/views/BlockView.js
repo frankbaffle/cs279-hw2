@@ -199,9 +199,11 @@ define([
             var soundHandle;
             if(correct){
                 soundHandle = document.getElementById('soundCorrect');
+                soundHandle.currentTime = 0;
                 soundHandle.play();
             } else {
                 soundHandle = document.getElementById('soundIncorrect');
+                soundHandle.currentTime = 0;
                 soundHandle.play();
             }
         },
