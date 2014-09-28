@@ -30,3 +30,21 @@ exports.router.get('/:collection/:session', function(req, res) {
         }
     });
 }.bind(this));
+
+exports.router.get('/:collection/', function(req, res) {
+    var collection = req.params.collection;
+    var query = {};
+    var projection = {session: 1, group: 1, timestamp: 1, _id: 0};
+    var options = {};
+    if(collection == "logs"){
+        options.sort = ['_id', 'descending'];
+        options.limit = 180;
+    }
+    exports.service.query(collection, query, projection, options, function(err, result){
+        if(err != null){
+            res.json({"message": "error", error: err.toString(), result: result});
+        } else {
+            res.json({"message": "ok", error: null, result: result});
+        }
+    });
+}.bind(this));

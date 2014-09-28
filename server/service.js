@@ -38,7 +38,14 @@ prototype.addDoc = function(collName, session, doc, cb){
 
 prototype.getDocs = function(collName, session, cb){
     var collection = this.db.collection(collName);
-    collection.find({session: session}, null, {}, function(err, cursor) {
+    collection.find(query, {session: session}, {}, function(err, cursor) {
+        cursor.toArray(cb);
+    });
+};
+
+prototype.query = function(collName, query, projection, options, cb){
+    var collection = this.db.collection(collName);
+    collection.find(query, projection, options, function(err, cursor) {
         cursor.toArray(cb);
     });
 };
