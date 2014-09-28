@@ -31,10 +31,25 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 this["cs279hw2"]["templates"]["Start"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, self=this;
+
+function program1(depth0,data) {
   
+  
+  return "\n            <h2>Thank you</h2>\n            <p>You have already contributed to this study. The study only requires\n            participants to complete the test once. Due to the nature of the study,\n            if you started (by pressing the start button)\n            and abandoned the test, then you are no longer eligible to take the test.</p>\n        ";
+  }
 
+function program3(depth0,data) {
+  
+  
+  return "\n            <div class=\"alert alert-warning\" role=\"alert\">\n                <b>Notice</b> Once you click start, you <b>must</b> complete the study without interruption.\n                If you close this window <b>after</b> pressing start, then you will be unable to take the test again.\n                Please carefully read the instruction below.</p>\n            </div>\n            <h2>Instructions</h2>\n            <p>Please open this url in a browser other than IE and maximize your screen.\n                You will be given further instructions upon clicking the start button below.</p>\n            <button id=\"next\" type=\"button\" class=\"btn btn-lg btn-default\">Start</button>\n        ";
+  }
 
-  return "<div class=\"row\">\n    <div class=\"col-lg-4\"></div>\n    <div class=\"col-lg-4\">\n        <div class=\"text-center\">\n            <h2>Instructions</h2>\n            <p>Please open this url in a browser other than IE and maximize your screen.\n                You will be given further instructions upon clicking the start button below.</p>\n            <button id=\"next\" type=\"button\" class=\"btn btn-lg btn-default\">Start</button>\n        </div>\n    </div>\n    <div class=\"col-lg-4\"></div>\n</div>";
+  buffer += "<div class=\"row\">\n    <div class=\"col-lg-4\"></div>\n    <div class=\"col-lg-4\">\n        <div class=\"text-center\">\n        ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.started), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </div>\n    </div>\n    <div class=\"col-lg-4\"></div>\n</div>";
+  return buffer;
   });
 
 this["cs279hw2"]["templates"]["Survey"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

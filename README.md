@@ -28,3 +28,5 @@ TODOs:
 Note for Experiment:
 to start the program in group1 mode, use http://localhost:8000/?group=1
 to start the program in group0 mode, use http://localhost:8000/?group=0
+to reset a session, use http://localhost:8000/?reset=1
+to debug, use http://localhost:8000/?debug=1

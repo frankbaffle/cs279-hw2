@@ -12,10 +12,13 @@ define([
             "click #next": "onNextClick"
         },
 
-        initialize: function(){
+        debug: false,
+
+        initialize: function(params){
             this.trialLog = [];
             this.currentLog = null;
             this.currentTab = "home";
+            this.debug = params.debug;
         },
 
         die: function(){
@@ -31,6 +34,9 @@ define([
         render: function(){
             var compiledTemplate = this.template();
             this.$el.html(compiledTemplate);
+            if(this.debug){
+                this.$el.find("#next").removeClass("hidden");
+            }
             return this;
         },
 

@@ -2,10 +2,23 @@
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
         <div class="text-center">
+        {{#if started}}
+            <h2>Thank you</h2>
+            <p>You have already contributed to this study. The study only requires
+            participants to complete the test once. Due to the nature of the study,
+            if you started (by pressing the start button)
+            and abandoned the test, then you are no longer eligible to take the test.</p>
+        {{else}}
+            <div class="alert alert-warning" role="alert">
+                <b>Notice</b> Once you click start, you <b>must</b> complete the study without interruption.
+                If you close this window <b>after</b> pressing start, then you will be unable to take the test again.
+                Please carefully read the instruction below.</p>
+            </div>
             <h2>Instructions</h2>
             <p>Please open this url in a browser other than IE and maximize your screen.
                 You will be given further instructions upon clicking the start button below.</p>
             <button id="next" type="button" class="btn btn-lg btn-default">Start</button>
+        {{/if}}
         </div>
     </div>
     <div class="col-lg-4"></div>

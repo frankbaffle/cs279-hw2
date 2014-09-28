@@ -49,8 +49,8 @@ define([
 
     Controller.prototype.displayStart = function(){
         console.log("displayStart");
-        var startView = new StartView();
-        startView.initialize();
+        var startView = new StartView({subjectModel: this.subjectModel});
+        startView.initialize({subjectModel: this.subjectModel});
         startView.render();
         this.stateModel.set("state", "start");
     };
@@ -59,6 +59,11 @@ define([
         var taskIndex = 0;
         this.stateModel.set("task", taskIndex);
         $("#start-container").removeClass("active");
+
+        //
+        this.subjectModel.set("started", true);
+        this.subjectModel.save();
+
         this.startBlock();
     };
 
@@ -77,7 +82,7 @@ define([
         var task = this.appData.tasks[taskIndex];
 
         console.log("startBlock", task);
-        var blockView = new BlockView();
+        var blockView = new BlockView({debug: this.stateModel.get("debug")});
         blockView.setTask(task);
         blockView.render();
         $("#block-container").html(blockView.el);
@@ -95,6 +100,7 @@ define([
         if(lastTask.block == "perform"){
             var currentTrials = this.subjectModel.get("trials");
             this.subjectModel.set("trials", currentTrials.concat(blockView.trialLog));
+            this.subjectModel.save();
             this.startNasa(lastTask);
         } else {
             this.nextBlock();
@@ -123,9 +129,14 @@ define([
         console.log("nasaCompleted", nasaView.data);
         $("#block-container").removeClass("active");
 
+        //subject model
+        var currentNasas = this.subjectModel.get("nasas");
+        this.subjectModel.set("nasas", currentNasas.concat(nasaView.data));
+        this.subjectModel.save();
+
         var sData = this.subjectModel.attributes;
         var data = {data: nasaView.data};
-        var session = sData.id;
+        var session = sData.session;
         data.group = sData.group;
         data.interface = nasaView.task.interface;
         data.timestamp = (new Date()).toISOString();
@@ -148,9 +159,13 @@ define([
     Controller.prototype.surveyCompleted = function(surveyView){
         console.log("surveyCompleted");
 
+        //subject model
+        this.subjectModel.set("survey", surveyView.data);
+        this.subjectModel.save();
+
         var sData = this.subjectModel.attributes;
         var data = {data: surveyView.data};
-        var session = sData.id;
+        var session = sData.session;
         data.group = sData.group;
         data.timestamp = (new Date()).toISOString();
         this.service.submitData("surveys", session, data);
@@ -167,7 +182,7 @@ define([
         $("#thankyou-container").addClass("active");
 
         //var data = this.subjectModel.attributes;
-        //this.service.submitSubjectLog(data.id, data);
+        //this.service.submitSubjectLog(data.session, data);
     };
 
     Controller.prototype.trialCompleted = function(blockView, log, logs, task){
@@ -179,7 +194,7 @@ define([
 
         var sData = this.subjectModel.attributes;
         var logData = _.clone(log);
-        var session = sData.id;
+        var session = sData.session;
         logData.group = sData.group;
         logData.block = task.block;
 

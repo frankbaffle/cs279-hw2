@@ -2,14 +2,14 @@ define(["Utils"],
     function (Utils) {
 
     var SubjectModel = Backbone.Model.extend({
-
+        localStorage: new Backbone.LocalStorage('model.SubjectModel'),
         defaults: function() {
             return {
-                id: Utils.getSubjectId(),
+                session: Utils.getSubjectId(),
+                started: false,
                 group: 0,
-                commandMapsNasa: {},
-                ribbonsNasa: {},
-                survey: {},
+                nasas: [],
+                survey: null,
                 trials: []
             };
         }
