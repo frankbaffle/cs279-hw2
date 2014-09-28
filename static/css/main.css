@@ -70,6 +70,10 @@ html, body {
 #layoutImg {
 }
 
+.addPadding {
+    padding: 10px;
+}
+
 #infoColumn {
     padding: 10px;
 }

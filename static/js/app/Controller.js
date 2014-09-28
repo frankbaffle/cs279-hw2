@@ -136,8 +136,9 @@ define([
 
     Controller.prototype.startSurvey = function(){
         console.log("startSurvey");
-        var surveyView = new SurveyView();
-        surveyView.initialize();
+        var sData = this.subjectModel.attributes;
+        var surveyView = new SurveyView({group: sData.group});
+        surveyView.initialize({group: sData.group});
         surveyView.render();
         this.stateModel.set("state", "survey");
         $("#block-container").removeClass("active");

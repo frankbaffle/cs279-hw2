@@ -13,9 +13,11 @@ define([
             "click #next": "nextClicked"
         },
 
+        group: 0,
         data: {},
 
-        initialize: function(){
+        initialize: function(params){
+            this.group = params.group;
             console.log("SurveyView.initialize");
         },
 
@@ -26,7 +28,7 @@ define([
         render: function(){
             console.log("SurveyView.render");
             //var compiledTemplate = this.template(this.model.attributes);
-            var compiledTemplate = this.template();
+            var compiledTemplate = this.template({isGroup0: this.group == 0});
             this.$el.html(compiledTemplate);
         },
 

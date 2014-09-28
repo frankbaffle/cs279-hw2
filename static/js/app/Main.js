@@ -60,6 +60,8 @@ define([
         //this.state.pushState(this.stateModel);
 
         EventBus.trigger("start", this);
+        //$("#start-container").removeClass("active");
+        //this.controller.startSurvey();
 
         //var data = this.subjectModel.attributes;
         //this.service.submitLog(data.id, data);

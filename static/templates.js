@@ -25,7 +25,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"row\">\n    <div id=\"layoutColumn\" class=\"col-xs-6 col-lg-8\">\n        <img class=\"unselectable img-responsive\" id=\"layoutImg\" src=\"img/tabs/home_tab.png\" />\n    </div>\n    <div class=\"col-xs-6 col-lg-4\">\n        <div id=\"infoColumn\">\n            <div class=\"panel panel-default\">\n                <div id=\"commandDescription\" class=\"panel-heading text-center\"></div>\n                <div class=\"panel-body text-center\">\n                    <img id=\"commandImg\" class=\"unselectable\" src=\"img/icons/bold.png\" />\n                    <br>\n                    <button id=\"next\" type=\"button\" class=\"btn btn-default hidden\">skip</button>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
+  return "<div class=\"row\">\n    <div id=\"layoutColumn\" class=\"col-xs-6 col-lg-8\">\n        <img class=\"unselectable img-responsive\" id=\"layoutImg\" src=\"img/tabs/home_tab.png\" />\n    </div>\n    <div class=\"col-xs-6 col-lg-4\">\n        <div id=\"infoColumn\">\n            <div class=\"panel panel-default\">\n                <div id=\"commandDescription\" class=\"panel-heading text-center\"></div>\n                <div class=\"panel-body text-center\">\n                    <p>Instructions: Find the button below on the interface to the left and click on it.</p>\n                    <br>\n                    <img id=\"commandImg\" class=\"unselectable\" src=\"img/icons/bold.png\" />\n                    <br>\n                    <button id=\"next\" type=\"button\" class=\"btn btn-default hidden\">skip</button>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
   });
 
 this["cs279hw2"]["templates"]["Start"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -34,16 +34,31 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"row\">\n    <div class=\"col-lg-4\"></div>\n    <div class=\"col-lg-4\">\n        <div class=\"text-center\">\n            <h2>To begin, press the start button below.</h2>\n            <button id=\"next\" type=\"button\" class=\"btn btn-lg btn-default\">Start</button>\n        </div>\n    </div>\n    <div class=\"col-lg-4\"></div>\n</div>";
+  return "<div class=\"row\">\n    <div class=\"col-lg-4\"></div>\n    <div class=\"col-lg-4\">\n        <div class=\"text-center\">\n            <h2>Instructions</h2>\n            <p>Please open this url in a browser other than IE and maximize your screen.\n                You will be given further instructions upon clicking the start button below.</p>\n            <button id=\"next\" type=\"button\" class=\"btn btn-lg btn-default\">Start</button>\n        </div>\n    </div>\n    <div class=\"col-lg-4\"></div>\n</div>";
   });
 
 this["cs279hw2"]["templates"]["Survey"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, self=this;
+
+function program1(depth0,data) {
   
+  
+  return "\n                <div class=\"row\">\n                    <div id=\"commandmaps-choice\" class=\"col-xs-6 col-lg-6 addPadding\">\n                        <img class=\"img-responsive\" src=\"img/commandmaps_thumbnail.png\" />\n                    </div>\n                    <div id=\"ribbons-choice\" class=\"col-xs-6 col-lg-6 addPadding\">\n                        <img class=\"img-responsive\" src=\"img/ribbons_thumbnail.png\" style=\"padding-top: 56px\" />\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-xs-6 col-lg-6 addPadding\">\n                        <input type=\"RADIO\" name=\"preference\" value=\"CommandMaps\"> CommandMaps (no tabs)\n                    </div>\n                    <div class=\"col-xs-6 col-lg-6 addPadding\">\n                        <input type=\"RADIO\" name=\"preference\" value=\"Ribbons\"> Ribbons (tabs)\n                    </div>\n                </div>\n            ";
+  }
 
+function program3(depth0,data) {
+  
+  
+  return "\n                <div class=\"row\">\n                    <div id=\"ribbons-choice\" class=\"col-xs-6 col-lg-6 addPadding\">\n                        <img class=\"img-responsive\" src=\"img/ribbons_thumbnail.png\" style=\"padding-top: 56px\" />\n                    </div>\n                    <div id=\"commandmaps-choice\" class=\"col-xs-6 col-lg-6 addPadding\">\n                        <img class=\"img-responsive\" src=\"img/commandmaps_thumbnail.png\" />\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-xs-6 col-lg-6 addPadding\">\n                        <input type=\"RADIO\" name=\"preference\" value=\"Ribbons\"> Ribbons (tabs)\n                    </div>\n                    <div class=\"col-xs-6 col-lg-6 addPadding\">\n                        <input type=\"RADIO\" name=\"preference\" value=\"CommandMaps\"> CommandMaps (no tabs)\n                    </div>\n                </div>\n            ";
+  }
 
-  return "<div id=\"survey\" class=\"row\">\n    <div class=\"col-lg-4\"></div>\n    <div class=\"col-lg-4\">\n        <div class=\"text-left\">\n            <h1>Interface Preference</h1>\n            Which interface do you prefer?\n            <form action=\"\">\n                <div class=\"form-group-lg\">\n                    <input type=\"RADIO\" name=\"preference\" value=\"CommandMaps\"> CommandMaps\n                </div>\n                <div class=\"form-group-lg\">\n                    <input type=\"RADIO\" name=\"preference\" value=\"Ribbons\"> Ribbons\n                </div>\n            </form>\n        </div>\n        <div class=\"text-right\">\n            <button id=\"next\" type=\"button\" class=\"btn btn-default\">Submit</button>\n        </div>\n    </div>\n    <div class=\"col-lg-4\"></div>\n</div>";
+  buffer += "<div id=\"survey\" class=\"row\">\n    <div class=\"col-lg-4\"></div>\n    <div class=\"col-lg-4\">\n        <div class=\"text-center\">\n            <h1>Interface Preference</h1>\n            Which interface do you prefer?\n            ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isGroup0), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        </div>\n        <div class=\"text-right\">\n            <button id=\"next\" type=\"button\" class=\"btn btn-default\" disabled>Submit</button>\n        </div>\n    </div>\n    <div class=\"col-lg-4\"></div>\n</div>";
+  return buffer;
   });
 
 this["cs279hw2"]["templates"]["ThankYou"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
