@@ -174,8 +174,9 @@ define([
     };
 
     Controller.prototype.displayThankYou = function(){
-        var surveyView = new ThankYouView();
-        surveyView.initialize();
+        var session = this.subjectModel.attributes.session;
+        var surveyView = new ThankYouView({session: session});
+        surveyView.initialize({session: session});
         surveyView.render();
         this.stateModel.set("state", "thankyou");
         $("#survey-container").removeClass("active");

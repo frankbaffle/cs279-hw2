@@ -79,8 +79,13 @@ function program3(depth0,data) {
 this["cs279hw2"]["templates"]["ThankYou"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  return "<row id=\"thankyou\">\n    <div class=\"col-lg-12 vertical-center-item\">\n        <div class=\"text-center\">\n            <h1>Thank You!</h1>\n        </div>\n    </div>\n</row>";
+  buffer += "<row id=\"thankyou\">\n    <div class=\"col-lg-12\">\n        <div class=\"text-center\">\n            <div class=\"row\">\n                <h1>Thank You!</h1>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-xs-4\"></div>\n                    <div class=\"col-xs-4\">\n                        <div class=\" addPadding\">\n                            <div class=\"panel panel-success\">\n                            <div id=\"commandDescription\" class=\"panel-heading text-center\">Survey Completion Code</div>\n                            <div class=\"panel-body text-center\">\n                                <b>";
+  if (helper = helpers.session) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.session); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</b>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-xs-4\"></div>\n            </div>\n\n        </div>\n    </div>\n</row>";
+  return buffer;
   });

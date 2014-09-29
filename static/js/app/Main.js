@@ -70,9 +70,14 @@ define([
         EventBus.trigger("start", this);
         //$("#start-container").removeClass("active");
         //this.controller.startSurvey();
+        
+        //$("#start-container").removeClass("active");
+        //this.controller.displayThankYou();
 
         //var data = this.subjectModel.attributes;
         //this.service.submitLog(data.session, data);
+
+
 
         var imageSrc = [{name: "commandmap", src: "img/tabs/commandmap_layout.png"}];
         //var cmdNames = _.map(CommandSet1.concat(CommandSet2), function(cmd){return cmd.name});
