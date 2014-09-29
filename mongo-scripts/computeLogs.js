@@ -48,6 +48,8 @@ var finalizeFunction = function(key, value) {
     return value;
 };
 
+var sessions = db.surveys.find({},{session:1}).map(function(x){return x.session});
+
 var result = db.runCommand(
     {
         mapReduce: 'logs',
@@ -55,7 +57,7 @@ var result = db.runCommand(
         reduce: reduceFunction,
         finalize: finalizeFunction,
         out: { replace: 'logs_computed', db: 'cs279_hw2_online' },
-        query: {},
+        query: {session: {$in: sessions}},
         verbose: true,
         jsMode: true
     }
