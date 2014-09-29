@@ -17,8 +17,9 @@ define([
         $.ajax({
             type: "POST",
             url: url,
-            data: data,
-            dataType: "json",
+            processData: false,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
             success: function(data){
                 console.log(data);
             }

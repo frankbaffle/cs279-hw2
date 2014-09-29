@@ -12,14 +12,19 @@ define([
             "click #next": "nextClicked"
         },
 
-        initialize: function(){
-            console.log("StartView.initialize");
+        subjectModel: null,
+        started: false,
+
+        initialize: function(params){
+            this.subjectModel = params.subjectModel;
+            this.started = this.subjectModel.get("started");
+            console.log("StartView.initialize", this.subjectModel.attributes);
         },
 
         render: function(){
             console.log("StartView.render");
             //var compiledTemplate = this.template(this.model.attributes);
-            var compiledTemplate = this.template();
+            var compiledTemplate = this.template({started: this.started});
             this.$el.html(compiledTemplate);
         },
 

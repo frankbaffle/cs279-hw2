@@ -5,8 +5,12 @@ define([
     "Controller",
     "EventBus",
     "services/Service",
-    "AppData"
-    ], function(StateModel, SubjectModel, State, Controller, EventBus, Service, AppData) {
+    "Utils",
+    "AppData",
+    "data/CommandSet1",
+    "data/CommandSet2"
+    ], function(StateModel, SubjectModel, State, Controller, EventBus, Service, Utils,
+                AppData, CommandSet1, CommandSet2) {
 
     var Main = function(){
         this.stateModel = null;
@@ -23,18 +27,16 @@ define([
         document.main = this;
 
         this.service = new Service();
-
-        this.subjectModel = new SubjectModel();
-
-        //always reset the initial state for now.
-        this.stateModel = new StateModel({id: "model.StateModel"});
-
-        //this.stateModel.fetch();
-        //this.stateModel.fetch({reset:true});
+        this.controller = new Controller();
         this.state = new State();
 
-        this.controller = new Controller();
+        //state model
+        this.stateModel = new StateModel({id: "model.StateModel"});
 
+        var debug = this.state.getQueryParamByName("debug");
+        if(debug == "1"){
+            this.stateModel.set("debug", "1");
+        }
 
         var initGroup = this.state.getQueryParamByName("group");
         if(initGroup != null){
@@ -42,7 +44,17 @@ define([
             //console.log("group", initGroup, typeof(initGroup));
             this.stateModel.set("group", initGroup);
         }
-        this.stateModel.set("session", this.subjectModel.get("id"));
+
+        //subject model
+        this.subjectModel = new SubjectModel({id: "model.SubjectModel"});
+
+        var resetSession = this.state.getQueryParamByName("reset");
+        if(resetSession == null && debug == null){
+            this.subjectModel.fetch();
+        }
+        this.subjectModel.save();
+
+        this.stateModel.set("session", this.subjectModel.get("session"));
         this.stateModel.save();
 
         this.subjectModel.set("group", this.stateModel.get("group"));
@@ -56,9 +68,32 @@ define([
         //this.state.pushState(this.stateModel);
 
         EventBus.trigger("start", this);
+        //$("#start-container").removeClass("active");
+        //this.controller.startSurvey();
+        
+        //$("#start-container").removeClass("active");
+        //this.controller.displayThankYou();
 
         //var data = this.subjectModel.attributes;
-        //this.service.submitLog(data.id, data);
+        //this.service.submitLog(data.session, data);
+
+
+
+        var imageSrc = [{name: "commandmap", src: "img/tabs/commandmap_layout.png"}];
+        //var cmdNames = _.map(CommandSet1.concat(CommandSet2), function(cmd){return cmd.name});
+        var cmds = CommandSet1.concat(CommandSet2);
+        for(var i =-1;++i<cmds.length;){
+            var cmd = cmds[i];
+            if(cmd.type == "tab"){
+                imageSrc.push({name: cmd.name+"_tab", src: "img/tabs/"+cmd.name+"_tab.png"});
+            } else {
+                imageSrc.push({name: cmd.name, src: "img/icons/"+cmd.name+".png"});
+            }
+        }
+
+        Utils.preloadImages(imageSrc, function(images){
+            console.log('images loaded', images);
+        });
 
     };
 

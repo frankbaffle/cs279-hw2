@@ -13,6 +13,8 @@ define([], function () {
                 group: 0,
                 task: 0,
                 trial: 0
+                //this should be hidden if not set
+                //debug: false
             };
         }
     });

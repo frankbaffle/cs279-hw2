@@ -49,8 +49,8 @@ define([
 
     Controller.prototype.displayStart = function(){
         console.log("displayStart");
-        var startView = new StartView();
-        startView.initialize();
+        var startView = new StartView({subjectModel: this.subjectModel});
+        startView.initialize({subjectModel: this.subjectModel});
         startView.render();
         this.stateModel.set("state", "start");
     };
@@ -59,6 +59,11 @@ define([
         var taskIndex = 0;
         this.stateModel.set("task", taskIndex);
         $("#start-container").removeClass("active");
+
+        //
+        this.subjectModel.set("started", true);
+        this.subjectModel.save();
+
         this.startBlock();
     };
 
@@ -77,7 +82,7 @@ define([
         var task = this.appData.tasks[taskIndex];
 
         console.log("startBlock", task);
-        var blockView = new BlockView();
+        var blockView = new BlockView({debug: this.stateModel.get("debug")});
         blockView.setTask(task);
         blockView.render();
         $("#block-container").html(blockView.el);
@@ -95,6 +100,7 @@ define([
         if(lastTask.block == "perform"){
             var currentTrials = this.subjectModel.get("trials");
             this.subjectModel.set("trials", currentTrials.concat(blockView.trialLog));
+            this.subjectModel.save();
             this.startNasa(lastTask);
         } else {
             this.nextBlock();
@@ -123,9 +129,14 @@ define([
         console.log("nasaCompleted", nasaView.data);
         $("#block-container").removeClass("active");
 
+        //subject model
+        var currentNasas = this.subjectModel.get("nasas");
+        this.subjectModel.set("nasas", currentNasas.concat(nasaView.data));
+        this.subjectModel.save();
+
         var sData = this.subjectModel.attributes;
         var data = {data: nasaView.data};
-        var session = sData.id;
+        var session = sData.session;
         data.group = sData.group;
         data.interface = nasaView.task.interface;
         data.timestamp = (new Date()).toISOString();
@@ -136,8 +147,9 @@ define([
 
     Controller.prototype.startSurvey = function(){
         console.log("startSurvey");
-        var surveyView = new SurveyView();
-        surveyView.initialize();
+        var sData = this.subjectModel.attributes;
+        var surveyView = new SurveyView({group: sData.group});
+        surveyView.initialize({group: sData.group});
         surveyView.render();
         this.stateModel.set("state", "survey");
         $("#block-container").removeClass("active");
@@ -147,9 +159,13 @@ define([
     Controller.prototype.surveyCompleted = function(surveyView){
         console.log("surveyCompleted");
 
+        //subject model
+        this.subjectModel.set("survey", surveyView.data);
+        this.subjectModel.save();
+
         var sData = this.subjectModel.attributes;
         var data = {data: surveyView.data};
-        var session = sData.id;
+        var session = sData.session;
         data.group = sData.group;
         data.timestamp = (new Date()).toISOString();
         this.service.submitData("surveys", session, data);
@@ -158,27 +174,28 @@ define([
     };
 
     Controller.prototype.displayThankYou = function(){
-        var surveyView = new ThankYouView();
-        surveyView.initialize();
+        var session = this.subjectModel.attributes.session;
+        var surveyView = new ThankYouView({session: session});
+        surveyView.initialize({session: session});
         surveyView.render();
         this.stateModel.set("state", "thankyou");
         $("#survey-container").removeClass("active");
         $("#thankyou-container").addClass("active");
 
         //var data = this.subjectModel.attributes;
-        //this.service.submitSubjectLog(data.id, data);
+        //this.service.submitSubjectLog(data.session, data);
     };
 
     Controller.prototype.trialCompleted = function(blockView, log, logs, task){
         console.log("trial "+logs.length+" complete", log);
+        this.stateModel.set("trial", logs.length);
         if(task.block == "familiarize"){
             return;
         }
 
-        this.stateModel.set("trial", logs.length);
         var sData = this.subjectModel.attributes;
         var logData = _.clone(log);
-        var session = sData.id;
+        var session = sData.session;
         logData.group = sData.group;
         logData.block = task.block;
 

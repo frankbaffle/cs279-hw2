@@ -8,13 +8,8 @@ var MongoClient = require("mongodb").MongoClient,
 
 exports = module.exports = MongoService;
 
-function MongoService(test){
-    if(test){
-        this.dbName = "cs279_hw2_test";
-    } else {
-        this.dbName = "cs279_hw2";
-    }
-    //this.subjectsCollection = "subjects";
+function MongoService(suffix){
+    this.dbName = "cs279_hw2"+suffix;
 }
 
 var prototype = MongoService.prototype;
@@ -43,7 +38,14 @@ prototype.addDoc = function(collName, session, doc, cb){
 
 prototype.getDocs = function(collName, session, cb){
     var collection = this.db.collection(collName);
-    collection.find({session: session}, null, {}, function(err, cursor) {
+    collection.find({session: session}, {}, function(err, cursor) {
+        cursor.toArray(cb);
+    });
+};
+
+prototype.query = function(collName, query, projection, options, cb){
+    var collection = this.db.collection(collName);
+    collection.find(query, projection, options, function(err, cursor) {
         cursor.toArray(cb);
     });
 };

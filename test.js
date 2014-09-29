@@ -1,2 +1,2 @@
 var app = require("./app");
-app.init(true);
+app.init("_test");

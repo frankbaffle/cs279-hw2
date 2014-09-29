@@ -10,8 +10,11 @@ node app.js
 
 Details:
 
-Mongo
- - db = cs279_hw2
+Mongo:
+
+ - db (for lab) = cs279_hw2
+ - db (for testing) = cs279_hw2_test
+ - db (for online) = cs279_hw2_online
  - collections
    - logs
    - surveys
@@ -20,27 +23,10 @@ Mongo
 TODOs:
 
 - Preload images
-+ Database hookup
-- CSV export
-
-+ Logs
-  + Add group (interface order)
-  + Required tab switch (already have # tab switches)
-  + Timestamp
-  + Name of command
-  + Interface
-  + Identifier
-
-+ Survey/Nasa
-  + No default on survey (required fields + submit).
-  + Log nasa, survey.
-
-+ Parametrize group
-
-Questions to post:
-+ Next after each trial?
-+ Require toggling CM?
+- Convert true/false to 0/1 for tabSwitch field
 
 Note for Experiment:
 to start the program in group1 mode, use http://localhost:8000/?group=1
 to start the program in group0 mode, use http://localhost:8000/?group=0
+to reset a session, use http://localhost:8000/?reset=1
+to debug, use http://localhost:8000/?debug=1

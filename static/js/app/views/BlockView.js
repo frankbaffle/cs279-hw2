@@ -12,10 +12,13 @@ define([
             "click #next": "onNextClick"
         },
 
-        initialize: function(){
+        debug: false,
+
+        initialize: function(params){
             this.trialLog = [];
             this.currentLog = null;
             this.currentTab = "home";
+            this.debug = params.debug;
         },
 
         die: function(){
@@ -31,6 +34,9 @@ define([
         render: function(){
             var compiledTemplate = this.template();
             this.$el.html(compiledTemplate);
+            if(this.debug){
+                this.$el.find("#next").removeClass("hidden");
+            }
             return this;
         },
 
@@ -160,7 +166,7 @@ define([
             console.log('updateTrialDisplay', name);
             try {
                 $("#commandImg").attr("src", "img/icons/"+name+".png");
-                $("#commandDescription").html(name);
+                $("#commandDescription").html(name.toUpperCase());
             } catch(e){
 
             }
@@ -196,12 +202,14 @@ define([
         },
 
         beep: function(correct){
-            var soundHandle = document.getElementById('soundHandle');
+            var soundHandle;
             if(correct){
-                soundHandle.src = 'sounds/correct1.wav';
+                soundHandle = document.getElementById('soundCorrect');
+                soundHandle.currentTime = 0;
                 soundHandle.play();
             } else {
-                soundHandle.src = 'sounds/incorrect1.wav';
+                soundHandle = document.getElementById('soundIncorrect');
+                soundHandle.currentTime = 0;
                 soundHandle.play();
             }
         },

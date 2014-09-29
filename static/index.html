@@ -30,28 +30,34 @@
 
         <div class="container">
 
-            <div class="tab-content next-size">
+            <div class="tab-content expand">
 
-                <div id="start-container" class="tab-pane active">
-                </div>
-                <div id="next-container" class="tab-pane next-size">
-                    <row id="next-btn-row">
-                        <div class="col-lg-12 vertical-center-item">
-                            <button id="nextBlockBtn" type="button" class="btn btn-lg btn-default horizontal-center-item">Next</button>
-                        </div>
-                    </row>
+                <div id="start-container" class="tab-pane active expand">
                 </div>
 
-                <div id="block-container" class="tab-pane">
+                <div id="next-container" class="tab-pane">
+                    <div class="vertical-center-item text-center">
+                        <p>On the next page, you will be asked to perform a series of tasks.
+                           Please carry out these tasks as quickly as possible.</p>
+                        <button id="nextBlockBtn" type="button" class="btn btn-lg btn-default horizontal-center-item">Next</button>
+                    </div>
                 </div>
+
+                <div id="block-container" class="tab-pane expand">
+                </div>
+
                 <div id="survey-container" class="tab-pane">
                 </div>
+
                 <div id="thankyou-container" class="tab-pane">
                 </div>
+
             </div>
 
         </div>
 
-        <audio id="soundHandle" style="display: none;"></audio>
+        <audio id="soundCorrect" preload="auto" style="display: none;" src="sounds/correct1.wav"></audio>
+        <audio id="soundIncorrect" preload="auto" style="display: none;" src="sounds/incorrect1.wav"></audio>
+
     </body>
 </html>
